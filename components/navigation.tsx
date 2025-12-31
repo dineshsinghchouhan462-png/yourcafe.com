@@ -1,19 +1,12 @@
-"use client"
-
 export default function Navigation() {
   return (
-    <nav className="fixed top-0 w-full z-50 backdrop-blur bg-white/70 border-b border-black/5">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="font-semibold tracking-wide">
-          The Lazy Barn
-        </span>
-
-        <div className="hidden md:flex gap-8 text-sm text-neutral-600">
-          <a href="#about">About</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#contact">Contact</a>
-        </div>
+    <nav className="px-6 py-4 flex justify-between items-center bg-white shadow">
+      <h1 className="text-xl font-serif">The Lazy Barn</h1>
+      <div className="space-x-4 text-sm">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </div>
     </nav>
-  )
+  );
 }
