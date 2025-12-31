@@ -9,9 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="antialiased scroll-smooth">
         <Navigation />
-        {children}
+        <main className="pt-24">{children}</main>
         <Footer />
       </body>
     </html>
