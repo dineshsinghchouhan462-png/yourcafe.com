@@ -1,49 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function Hero() {
-  return (
-    <section className="relative h-[90vh] w-full overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1600&q=80')",
-        }}
-      />
+  const ref = useRef<HTMLDivElement>(null);
 
-      {/* Dark Luxury Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  // Slow luxury parallax zoom
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const yText = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  return (
+    <section
+      ref={ref}
+      className="relative h-[100vh] pt-24 overflow-hidden"
+    >
+      {/* Background Image with slow zoom */}
+      <motion.div
+        style={{ scale }}
+        className="absolute inset-0 bg-cover bg-center will-change-transform"
+        aria-hidden
+      >
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1600&q=80')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+      </motion.div>
+
+      {/* Dark luxury overlay */}
+      <div className="absolute inset-0 bg-black/55" />
 
       {/* Content */}
-      <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="max-w-3xl"
-        >
-          <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 leading-tight">
+      <motion.div
+        style={{ y: yText, opacity }}
+        className="relative z-10 flex h-full items-center justify-center px-6 text-center"
+      >
+        <div className="max-w-4xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight mb-6"
+          >
             A Sanctuary of <br /> Calm Luxury
-          </h1>
+          </motion.h1>
 
-          <p className="text-sm md:text-lg text-gray-200 tracking-wide mb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1.2, ease: "easeOut" }}
+            className="text-sm md:text-lg text-gray-200 tracking-wide mb-10"
+          >
             European elegance · Japanese minimalism <br />
             Crafted for slow mornings & timeless evenings
-          </p>
+          </motion.p>
 
           <motion.a
             href="#about"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block border border-white px-8 py-3 text-sm uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="inline-block border border-white px-10 py-4 text-xs md:text-sm uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors"
           >
             Visit The Lazy Barn
           </motion.a>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
