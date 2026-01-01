@@ -1,26 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 
 export default function Hero() {
-  useEffect(() => {
-    const video = document.getElementById("hero-video") as HTMLVideoElement;
-    if (!video) return;
-
-    const onReady = () => {
-      window.dispatchEvent(new Event("hero-ready"));
-    };
-
-    video.addEventListener("loadeddata", onReady);
-    return () => video.removeEventListener("loadeddata", onReady);
-  }, []);
-
   return (
-    <section className="relative h-[100vh] pt-24 overflow-hidden bg-black">
+    <section className="relative h-[100vh] pt-28 overflow-hidden">
+      
       {/* Video */}
       <video
-        id="hero-video"
         className="absolute inset-0 h-full w-full object-cover"
         src="/videos/hero.mp4"
         autoPlay
@@ -31,32 +18,40 @@ export default function Hero() {
         poster="/videos/hero-poster.jpg"
       />
 
-      {/* Soft cinematic overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+      {/* Luxury overlay (lighter, warm) */}
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-4xl"
-        >
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">
-            A Sanctuary of<br />Calm Luxury
-          </h1>
+        <div className="max-w-4xl mt-10">
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight mb-6"
+          >
+            A Sanctuary of Calm Luxury
+          </motion.h1>
 
-          <p className="text-xs md:text-sm tracking-[0.25em] text-gray-200 mb-12 uppercase">
-            The Lazy Barn Café · Jodhpur
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-sm md:text-lg text-gray-200 tracking-wide mb-10"
+          >
+            THE LAZY BARN CAFÉ · JODHPUR
+          </motion.p>
 
-          <a
+          <motion.a
             href="#about"
-            className="inline-block border border-white/80 px-12 py-4 text-xs tracking-widest text-white hover:bg-white hover:text-black transition-all duration-500"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-block border border-white px-10 py-4 text-xs md:text-sm uppercase tracking-widest text-white hover:bg-white hover:text-black transition"
           >
             Visit The Lazy Barn
-          </a>
-        </motion.div>
+          </motion.a>
+        </div>
       </div>
     </section>
   );
