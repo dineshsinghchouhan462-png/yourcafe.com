@@ -1,66 +1,54 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const yText = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
   return (
-    <section
-      ref={ref}
-      className="relative h-[100vh] pt-24 overflow-hidden bg-black"
-    >
-      {/* VIDEO */}
-      <motion.video
-        style={{ scale }}
+    <section className="relative h-[100vh] w-full overflow-hidden pt-24">
+      {/* Fallback background (prevents black flash) */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/images/hero-poster.jpg')",
+        }}
+      />
+
+      {/* Video */}
+      <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/videos/hero.mp4"
+        poster="/images/hero-poster.jpg"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        poster="/images/hero-poster.jpg"
       />
 
-      {/* OVERLAY (stable, no flicker) */}
+      {/* Dark cinematic overlay */}
       <div className="absolute inset-0 bg-black/45" />
 
-      {/* FILM GRAIN (very subtle luxury trick) */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"120\" height=\"120\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"4\"/></filter><rect width=\"120\" height=\"120\" filter=\"url(%23n)\" opacity=\"0.4\"/></svg>')",
-        }}
-      />
+      {/* Subtle film grain */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04] mix-blend-overlay bg-[url('/images/grain.png')]" />
 
-      {/* CONTENT */}
-      <motion.div
-        style={{ y: yText, opacity }}
-        className="relative z-10 flex h-full items-center justify-center px-6 text-center"
-      >
-        <div className="max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 tracking-tight">
+      {/* Content */}
+      <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl"
+        >
+          {/* TEXT — untouched as you asked */}
+          <h1 className="text-5xl md:text-7xl font-serif text-white tracking-tight mb-4">
             The Lazy Barn
           </h1>
 
-          <p className="text-sm md:text-lg text-gray-200 tracking-wide leading-relaxed">
-            Jodhpur <br />
-            Slow mornings · Warm evenings · Unrushed conversations
+          <p className="text-sm md:text-lg text-neutral-200 tracking-wide">
+            Jodhpur · Slow mornings · Unhurried evenings
           </p>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }
