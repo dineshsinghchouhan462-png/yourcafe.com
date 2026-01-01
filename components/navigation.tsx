@@ -1,33 +1,23 @@
-"use client";
+// components/navigation.tsx
 
 export default function Navigation() {
   return (
-    <header className="fixed top-0 left-0 z-50 w-full">
-      <nav
-        className="
-          mx-auto flex max-w-7xl items-center justify-between
-          px-6 py-5
-          bg-black/65
-          backdrop-blur-md
-        "
-      >
-        {/* Brand */}
-        <h1 className="font-serif text-lg tracking-wide text-white">
+    <header className="absolute top-0 left-0 w-full z-30 pointer-events-none">
+      <div className="flex items-center justify-between px-6 pt-6 md:px-16 md:pt-12 pointer-events-auto">
+        
+        {/* Logo */}
+        <div className="font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal text-[#F4EFE9]/90">
           The Lazy Barn
-        </h1>
+        </div>
 
         {/* Menu */}
         <button
-          className="
-            text-xs uppercase tracking-[0.35em]
-            text-white/90
-            hover:text-white
-            transition
-          "
+          className="text-[14px] md:text-[16px] tracking-[0.12em] font-normal text-[#F4EFE9]/90 hover:text-[#F4EFE9]/70 transition-opacity duration-200"
         >
           Menu
         </button>
-      </nav>
+
+      </div>
     </header>
   );
 }
