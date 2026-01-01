@@ -1,66 +1,66 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function Hero() {
-  const [videoReady, setVideoReady] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const yText = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section className="relative h-[100svh] pt-24 overflow-hidden bg-black">
-      {/* Poster image (shows instantly, prevents black screen) */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ${
-          videoReady ? "opacity-0" : "opacity-100"
-        }`}
-        style={{
-          backgroundImage: "url('/hero-poster.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-
-      {/* Video */}
+    <section
+      ref={ref}
+      className="relative h-[100vh] pt-24 overflow-hidden bg-black"
+    >
+      {/* VIDEO */}
       <motion.video
+        style={{ scale }}
         className="absolute inset-0 h-full w-full object-cover"
+        src="/videos/hero.mp4"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        onCanPlay={() => setVideoReady(true)}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: videoReady ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        poster="/images/hero-poster.jpg"
+      />
+
+      {/* OVERLAY (stable, no flicker) */}
+      <div className="absolute inset-0 bg-black/45" />
+
+      {/* FILM GRAIN (very subtle luxury trick) */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"120\" height=\"120\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"4\"/></filter><rect width=\"120\" height=\"120\" filter=\"url(%23n)\" opacity=\"0.4\"/></svg>')",
+        }}
+      />
+
+      {/* CONTENT */}
+      <motion.div
+        style={{ y: yText, opacity }}
+        className="relative z-10 flex h-full items-center justify-center px-6 text-center"
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </motion.video>
-
-      {/* Dark overlay (stable, no flicker) */}
-      <div className="absolute inset-0 bg-black/40" />
-
-      {/* Film grain (ultra subtle) */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay bg-[url('/grain.png')]" />
-
-      {/* Content */}
-      <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
-        <div className="max-w-3xl">
-          <h1 className="font-serif text-4xl md:text-6xl tracking-tight text-white mb-3">
+        <div className="max-w-4xl">
+          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 tracking-tight">
             The Lazy Barn
           </h1>
 
-          <p className="text-xs tracking-[0.35em] text-white/80 mb-10">
-            CAFÉ · JODHPUR
+          <p className="text-sm md:text-lg text-gray-200 tracking-wide leading-relaxed">
+            Jodhpur <br />
+            Slow mornings · Warm evenings · Unrushed conversations
           </p>
-
-          <a
-            href="#about"
-            className="inline-block border border-white px-10 py-4 text-xs tracking-[0.25em] uppercase text-white transition hover:bg-white hover:text-black"
-          >
-            Visit The Lazy Barn
-          </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
