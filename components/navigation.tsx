@@ -7,6 +7,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -15,19 +16,33 @@ export default function Navigation() {
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-cream/85 backdrop-blur-md shadow-sm"
-          : "bg-cream"
+          ? "bg-[#f5f1ea]/90 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <h1 className="font-serif text-xl text-gray-900">
+        <h1
+          className={`font-serif text-xl tracking-tight transition-colors duration-500 ${
+            scrolled ? "text-gray-900" : "text-white"
+          }`}
+        >
           The Lazy Barn
         </h1>
 
-        <div className="space-x-6 text-sm tracking-wide text-gray-800">
-          <a href="#about" className="hover:opacity-70">About</a>
-          <a href="#gallery" className="hover:opacity-70">Gallery</a>
-          <a href="#contact" className="hover:opacity-70">Contact</a>
+        <div
+          className={`space-x-6 text-sm tracking-wide transition-colors duration-500 ${
+            scrolled ? "text-gray-800" : "text-gray-200"
+          }`}
+        >
+          <a href="#about" className="hover:opacity-70">
+            About
+          </a>
+          <a href="#gallery" className="hover:opacity-70">
+            Gallery
+          </a>
+          <a href="#contact" className="hover:opacity-70">
+            Contact
+          </a>
         </div>
       </nav>
     </header>
