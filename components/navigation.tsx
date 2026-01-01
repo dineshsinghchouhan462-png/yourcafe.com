@@ -6,15 +6,15 @@ export default function Navigation() {
       <div className="flex items-center justify-between px-6 pt-6 md:px-16 md:pt-12 pointer-events-auto">
         
         {/* Logo */}
-        <div className="font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal text-[#F4EFE9]/90">
+        <div className="font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal text-[#F4EFE9]">
           The Lazy Barn
         </div>
 
         {/* Menu */}
         <button
-          className="text-[14px] md:text-[16px] tracking-[0.12em] font-normal text-[#F4EFE9]/90 hover:text-[#F4EFE9]/70 transition-opacity duration-200"
+          className="text-[14px] md:text-[16px] tracking-[0.12em] font-normal text-[#F4EFE9] hover:text-[#F4EFE9]/80 transition-opacity duration-200"
         >
-          Menu
+          MENU
         </button>
 
       </div>
