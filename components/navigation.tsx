@@ -13,30 +13,28 @@ export default function Navigation() {
 
   return (
     <header
-      className={`
-        fixed top-0 left-0 z-50 w-full
-        transition-all duration-500 ease-out
-        ${
-          scrolled
-            ? "bg-black/70 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
-            : "bg-black/40"
-        }
-      `}
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
+        scrolled
+          ? "bg-black/80 backdrop-blur-xl"
+          : "bg-gradient-to-b from-black/70 via-black/30 to-transparent"
+      }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <h1 className="font-serif text-lg tracking-[0.12em] text-white">
-          THE LAZY BARN
+        {/* Brand */}
+        <h1 className="font-serif text-lg tracking-wide text-white">
+          The Lazy Barn
         </h1>
 
-        <div className="space-x-8 text-xs tracking-[0.2em] text-white/90 uppercase">
+        {/* Navigation */}
+        <div className="space-x-6 text-xs tracking-widest text-white/90">
           <a href="#about" className="hover:text-white transition">
-            About
+            ABOUT
           </a>
           <a href="#gallery" className="hover:text-white transition">
-            Gallery
+            GALLERY
           </a>
           <a href="#contact" className="hover:text-white transition">
-            Contact
+            CONTACT
           </a>
         </div>
       </nav>
