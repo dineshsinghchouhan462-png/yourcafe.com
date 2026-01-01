@@ -1,79 +1,66 @@
-"use "use client";
+"use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
 
   return (
-    <section className="relative h-[100vh] pt-24 overflow-hidden bg-black">
-      {/* Video */}
-      <video
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-          videoReady ? "opacity-100" : "opacity-0"
+    <section className="relative h-[100svh] pt-24 overflow-hidden bg-black">
+      {/* Poster image (shows instantly, prevents black screen) */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ${
+          videoReady ? "opacity-0" : "opacity-100"
         }`}
-        src="/videos/hero.mp4"
+        style={{
+          backgroundImage: "url('/hero-poster.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      {/* Video */}
+      <motion.video
+        className="absolute inset-0 h-full w-full object-cover"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        poster="/videos/hero-poster.jpg"
         onCanPlay={() => setVideoReady(true)}
-      />
+        initial={{ opacity: 0 }}
+        animate={{ opacity: videoReady ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </motion.video>
 
-      {/* Fallback background (no black screen ever) */}
-      {!videoReady && (
-        <div className="absolute inset-0 bg-neutral-900" />
-      )}
+      {/* Dark overlay (stable, no flicker) */}
+      <div className="absolute inset-0 bg-black/40" />
 
-      {/* Dark cinematic overlay */}
-      <div className="absolute inset-0 bg-black/45" />
-
-      {/* Film grain */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url('https://grainy-gradients.vercel.app/noise.svg')",
-        }}
-      />
+      {/* Film grain (ultra subtle) */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay bg-[url('/grain.png')]" />
 
       {/* Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex h-full items-center justify-center px-6 text-center"
-      >
+      <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
         <div className="max-w-3xl">
-          {/* Brand first */}
-          <h1 className="font-serif text-[2.8rem] md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.05] mb-4">
+          <h1 className="font-serif text-4xl md:text-6xl tracking-tight text-white mb-3">
             The Lazy Barn
           </h1>
 
-          {/* Location */}
-          <p className="text-[0.65rem] md:text-xs tracking-[0.35em] text-gray-300 uppercase mb-6">
-            Café · Jodhpur
+          <p className="text-xs tracking-[0.35em] text-white/80 mb-10">
+            CAFÉ · JODHPUR
           </p>
 
-          {/* Poetic line */}
-          <p className="text-sm md:text-lg text-gray-200 leading-relaxed mb-10">
-            Where conversations slow down,
-            <br />
-            and evenings stay a little longer.
-          </p>
-
-          {/* CTA */}
           <a
             href="#about"
-            className="inline-block border border-white/70 px-10 py-4 text-xs tracking-[0.3em] uppercase text-white hover:bg-white hover:text-black transition-colors duration-300"
+            className="inline-block border border-white px-10 py-4 text-xs tracking-[0.25em] uppercase text-white transition hover:bg-white hover:text-black"
           >
             Visit The Lazy Barn
           </a>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
-          }
+}
