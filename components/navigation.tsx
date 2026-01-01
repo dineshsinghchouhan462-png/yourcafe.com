@@ -15,28 +15,23 @@ export default function Navigation() {
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-black/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
-          : "bg-gradient-to-b from-black/70 via-black/30 to-transparent"
+          ? "bg-black/70 backdrop-blur-xl"
+          : "bg-black/40"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-8 py-5">
         {/* Brand */}
-        <h1 className="font-serif text-lg tracking-wide text-white">
+        <h1 className="font-serif text-xl tracking-wide text-white">
           The Lazy Barn
         </h1>
 
-        {/* Navigation */}
-        <div className="space-x-8 text-xs tracking-[0.25em] uppercase text-white/90">
-          <a href="#about" className="hover:text-white transition">
-            About
-          </a>
-          <a href="#gallery" className="hover:text-white transition">
-            Gallery
-          </a>
-          <a href="#contact" className="hover:text-white transition">
-            Contact
-          </a>
-        </div>
+        {/* Single Menu Trigger */}
+        <button
+          aria-label="Open menu"
+          className="text-xs uppercase tracking-[0.3em] text-white/90 hover:text-white transition"
+        >
+          Menu
+        </button>
       </nav>
     </header>
   );
