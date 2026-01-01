@@ -13,29 +13,31 @@ export default function Navigation() {
 
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
-        scrolled
-          ? "bg-cream/90 backdrop-blur-md shadow-sm"
-          : "bg-black/30 backdrop-blur-sm"
-      }`}
+      className={`
+        fixed top-0 left-0 z-50 w-full
+        transition-all duration-500 ease-out
+        ${
+          scrolled
+            ? "bg-black/70 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+            : "bg-black/40"
+        }
+      `}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <h1
-          className={`font-serif text-xl transition-colors duration-500 ${
-            scrolled ? "text-gray-900" : "text-white"
-          }`}
-        >
-          The Lazy Barn
+        <h1 className="font-serif text-lg tracking-[0.12em] text-white">
+          THE LAZY BARN
         </h1>
 
-        <div
-          className={`space-x-6 text-sm tracking-wide transition-colors duration-500 ${
-            scrolled ? "text-gray-800" : "text-gray-200"
-          }`}
-        >
-          <a href="#about" className="hover:opacity-70">About</a>
-          <a href="#gallery" className="hover:opacity-70">Gallery</a>
-          <a href="#contact" className="hover:opacity-70">Contact</a>
+        <div className="space-x-8 text-xs tracking-[0.2em] text-white/90 uppercase">
+          <a href="#about" className="hover:text-white transition">
+            About
+          </a>
+          <a href="#gallery" className="hover:text-white transition">
+            Gallery
+          </a>
+          <a href="#contact" className="hover:text-white transition">
+            Contact
+          </a>
         </div>
       </nav>
     </header>
