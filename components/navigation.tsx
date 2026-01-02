@@ -8,7 +8,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.5);
+      setScrolled(window.scrollY > window.innerHeight * 0.4);
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -17,13 +17,17 @@ export default function Navigation() {
   return (
     <>
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full z-40 pointer-events-none">
-        <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
+      <header
+        className={`fixed top-0 left-0 w-full z-40 pointer-events-none transition-all duration-700 ${
+          scrolled ? "header-scrolled" : "header-top"
+        }`}
+      >
+        <div className="header-inner flex items-center justify-between px-6 md:px-16 pointer-events-auto">
 
-          {/* LOGO — ULTRA PREMIUM */}
+          {/* LOGO */}
           <div
-            className={`logo-glass transition-opacity duration-700 ${
-              scrolled ? "opacity-80" : "opacity-95"
+            className={`logo-glass transition-all duration-700 ${
+              scrolled ? "opacity-85 scale-[0.96]" : "opacity-95 scale-100"
             }`}
           >
             <img
@@ -33,11 +37,13 @@ export default function Navigation() {
             />
           </div>
 
-          {/* MENU BUTTON */}
+          {/* MENU */}
           <button
             onClick={() => setOpen(true)}
-            className={`text-[14px] md:text-[16px] tracking-[0.12em] transition-colors duration-500 ${
-              scrolled ? "text-[#1f1f1f]" : "text-[#F4EFE9]/90"
+            className={`text-[14px] md:text-[16px] tracking-[0.14em] transition-all duration-500 ${
+              scrolled
+                ? "text-[#EAE6DF] opacity-85"
+                : "text-[#F4EFE9]/85"
             }`}
           >
             MENU
