@@ -1,25 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > window.innerHeight * 0.6);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const textColor = scrolled ? "text-[#1f1f1f]" : "text-[#F4EFE9]/90";
 
   return (
     <>
       {/* Header */}
-      <header className="absolute top-0 left-0 w-full z-40 pointer-events-none">
+      <header className="fixed top-0 left-0 w-full z-40 pointer-events-none">
         <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
           
           {/* Logo */}
-          <div className="font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal text-[#F4EFE9]/90">
+          <div
+            className={`font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal transition-colors duration-500 ${textColor}`}
+          >
             The Lazy Barn
           </div>
 
           {/* Menu Trigger */}
           <button
             onClick={() => setOpen(true)}
-            className="text-[14px] md:text-[16px] tracking-[0.12em] font-normal text-[#F4EFE9]/90 hover:text-[#F4EFE9] transition-opacity duration-200"
+            className={`text-[14px] md:text-[16px] tracking-[0.12em] font-normal transition-colors duration-500 ${textColor}`}
           >
             MENU
           </button>
@@ -47,7 +60,6 @@ export default function Navigation() {
               ))}
             </ul>
 
-            {/* Close */}
             <button
               onClick={() => setOpen(false)}
               className="mt-16 text-[12px] tracking-[0.2em] uppercase text-[#F4EFE9]/50 hover:text-[#F4EFE9]/80 transition-opacity"
