@@ -19,18 +19,19 @@ export default function Navigation() {
       {/* HEADER */}
       <header className="fixed top-0 left-0 w-full z-40 pointer-events-none">
         <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
-          
-          {/* LOGO */}
-          <img
-            src="/logo/lb-mark.png"
-            alt="The Lazy Barn"
-            className={`h-[14px] md:h-[18px] transition-all duration-700 ${
-              scrolled ? "opacity-70" : "opacity-85"
+
+          {/* LOGO — ULTRA PREMIUM */}
+          <div
+            className={`logo-glass transition-opacity duration-700 ${
+              scrolled ? "opacity-80" : "opacity-95"
             }`}
-            style={{
-              filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.25))",
-            }}
-          />
+          >
+            <img
+              src="/logo/lb-mark.png"
+              alt="The Lazy Barn"
+              className="logo-img"
+            />
+          </div>
 
           {/* MENU BUTTON */}
           <button
