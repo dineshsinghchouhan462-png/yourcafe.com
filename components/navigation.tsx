@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -17,23 +16,20 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Header */}
+      {/* HEADER */}
       <header className="fixed top-0 left-0 w-full z-40 pointer-events-none">
         <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
-
-          {/* Logo */}
-          <Image
-            src="/logo/lb-mark.svg"
+          
+          {/* LOGO */}
+          <img
+            src="/logo/lb-mark.png"
             alt="The Lazy Barn"
-            width={24}
-            height={24}
-            priority
-            className={`transition-opacity duration-500 ${
+            className={`h-[18px] md:h-[22px] transition-opacity duration-500 ${
               scrolled ? "opacity-90" : "opacity-80"
             }`}
           />
 
-          {/* Menu Trigger */}
+          {/* MENU BUTTON */}
           <button
             onClick={() => setOpen(true)}
             className={`text-[14px] md:text-[16px] tracking-[0.12em] font-normal transition-colors duration-500 ${
@@ -45,10 +41,12 @@ export default function Navigation() {
         </div>
       </header>
 
-      {/* Full-screen Menu Overlay */}
+      {/* FULLSCREEN MENU OVERLAY */}
       <div
         className={`fixed inset-0 z-50 bg-[#0f0f0f]/95 backdrop-blur-[2px] transition-opacity duration-500 ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex h-full items-center justify-center px-6">
