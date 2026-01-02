@@ -14,8 +14,6 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const textColor = scrolled ? "text-[#1f1f1f]" : "text-[#F4EFE9]/90";
-
   return (
     <>
       {/* Header */}
@@ -23,16 +21,20 @@ export default function Navigation() {
         <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
           
           {/* Logo */}
-          <div
-            className={`font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal transition-colors duration-500 ${textColor}`}
-          >
-            The Lazy Barn
-          </div>
+          <img
+            src="/logo/lb-mark.svg"
+            alt="The Lazy Barn"
+            className={`h-[18px] md:h-[22px] transition-opacity duration-500 ${
+              scrolled ? "opacity-90" : "opacity-80"
+            }`}
+          />
 
           {/* Menu Trigger */}
           <button
             onClick={() => setOpen(true)}
-            className={`text-[14px] md:text-[16px] tracking-[0.12em] font-normal transition-colors duration-500 ${textColor}`}
+            className={`text-[14px] md:text-[16px] tracking-[0.12em] font-normal transition-colors duration-500 ${
+              scrolled ? "text-[#1f1f1f]" : "text-[#F4EFE9]/90"
+            }`}
           >
             MENU
           </button>
