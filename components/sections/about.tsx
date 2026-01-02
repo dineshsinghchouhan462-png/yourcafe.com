@@ -8,7 +8,7 @@ export default function About() {
   return (
     <>
       <section className="bg-transparent">
-        <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-32 md:py-40">
+        <div className="mx-auto max-w-[1100px] px-6 md:px-16 pt-20 md:pt-28 pb-32 md:pb-40">
           
           {/* Image Wrapper */}
           <div
@@ -25,7 +25,7 @@ export default function About() {
               "
             />
 
-            {/* Soft glass overlay on hover */}
+            {/* Soft hover overlay */}
             <div
               className="
                 pointer-events-none
@@ -39,7 +39,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* LIGHTBOX */}
+      {/* Lightbox */}
       {open && (
         <div
           className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md"
@@ -48,13 +48,7 @@ export default function About() {
           <img
             src="/images/philosophy.jpg"
             alt="The Lazy Barn interior enlarged"
-            className="
-              max-h-[90vh]
-              max-w-[90vw]
-              rounded-[24px]
-              shadow-2xl
-              transition-transform duration-500
-            "
+            className="max-h-[90vh] max-w-[90vw] rounded-[24px] shadow-2xl"
           />
         </div>
       )}
