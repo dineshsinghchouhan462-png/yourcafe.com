@@ -42,7 +42,7 @@ export default function Hero() {
 
       {/* Hero Content */}
       <div className="relative z-10 flex h-full items-center">
-        <div className="px-6 md:px-16 max-w-[900px]">
+        <div className="px-6 md:px-16 max-w-[900px] text-center">
 
           {/* Brand Title */}
           <h1
@@ -54,15 +54,26 @@ export default function Hero() {
             The Lazy Barn
           </h1>
 
-          {/* Context Line */}
+          {/* Location */}
           <p
-            className={`mt-12 md:mt-16 text-[12px] md:text-[13px] uppercase
-              tracking-[0.28em] text-[#F4EFE9]/65
-              transition-all duration-[1400ms] ease-out delay-150
+            className={`mt-10 md:mt-12 text-[11px] md:text-[12px] uppercase
+              tracking-[0.32em] text-[#F4EFE9]/55
+              transition-all duration-[1200ms] ease-out delay-150
               ${textReady ? "opacity-100" : "opacity-0"}
             `}
           >
-            Jodhpur · Slow mornings · Unhurried evenings
+            Jodhpur
+          </p>
+
+          {/* Signature Line */}
+          <p
+            className={`mt-4 md:mt-6 text-[13px] md:text-[14px]
+              tracking-[0.18em] text-[#F4EFE9]/75
+              transition-all duration-[1400ms] ease-out delay-300
+              ${textReady ? "opacity-100" : "opacity-0"}
+            `}
+          >
+            Slow mornings · Unhurried evenings
           </p>
 
         </div>
