@@ -8,7 +8,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.6);
+      setScrolled(window.scrollY > window.innerHeight * 0.5);
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,15 +24,18 @@ export default function Navigation() {
           <img
             src="/logo/lb-mark.png"
             alt="The Lazy Barn"
-            className={`h-[18px] md:h-[22px] transition-opacity duration-500 ${
-              scrolled ? "opacity-90" : "opacity-80"
+            className={`h-[14px] md:h-[18px] transition-all duration-700 ${
+              scrolled ? "opacity-70" : "opacity-85"
             }`}
+            style={{
+              filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.25))",
+            }}
           />
 
           {/* MENU BUTTON */}
           <button
             onClick={() => setOpen(true)}
-            className={`text-[14px] md:text-[16px] tracking-[0.12em] font-normal transition-colors duration-500 ${
+            className={`text-[14px] md:text-[16px] tracking-[0.12em] transition-colors duration-500 ${
               scrolled ? "text-[#1f1f1f]" : "text-[#F4EFE9]/90"
             }`}
           >
