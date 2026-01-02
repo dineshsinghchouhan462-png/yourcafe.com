@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -19,12 +20,15 @@ export default function Navigation() {
       {/* Header */}
       <header className="fixed top-0 left-0 w-full z-40 pointer-events-none">
         <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
-          
+
           {/* Logo */}
-          <img
+          <Image
             src="/logo/lb-mark.svg"
             alt="The Lazy Barn"
-            className={`h-[18px] md:h-[22px] transition-opacity duration-500 ${
+            width={24}
+            height={24}
+            priority
+            className={`transition-opacity duration-500 ${
               scrolled ? "opacity-90" : "opacity-80"
             }`}
           />
