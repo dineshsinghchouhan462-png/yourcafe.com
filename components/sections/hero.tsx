@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
+  const [textReady, setTextReady] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setTextReady(true), 200);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <section className="relative h-[100svh] w-full overflow-hidden bg-[#0f0f0f]">
       
-      {/* Poster Image (instant paint, no flash) */}
+      {/* Poster Image */}
       <img
         src="/videos/hero-poster.jpg"
         alt=""
@@ -17,7 +23,7 @@ export default function Hero() {
         }`}
       />
 
-      {/* Video (fades in smoothly when ready) */}
+      {/* Video */}
       <video
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
           videoReady ? "opacity-100" : "opacity-0"
@@ -31,18 +37,31 @@ export default function Hero() {
         onCanPlayThrough={() => setVideoReady(true)}
       />
 
-      {/* Soft cinematic overlay */}
+      {/* Cinematic overlay */}
       <div className="absolute inset-0 bg-black/30" />
 
       {/* Hero Content */}
       <div className="relative z-10 flex h-full items-center">
         <div className="px-6 md:px-16 max-w-[900px]">
-          
-          <h1 className="font-serif text-[42px] leading-[1.05] md:text-[72px] md:leading-[1.05] tracking-[-0.01em] text-[#F4EFE9]">
+
+          {/* Brand Title */}
+          <h1
+            className={`font-serif text-[44px] md:text-[74px] leading-[1.08] text-[#F4EFE9]
+              transition-all duration-[1200ms] ease-out
+              ${textReady ? "opacity-100 tracking-[0.02em]" : "opacity-0 tracking-[0.08em]"}
+            `}
+          >
             The Lazy Barn
           </h1>
 
-          <p className="mt-6 text-[14px] md:text-[16px] tracking-[0.12em] text-[#F4EFE9]/85">
+          {/* Context Line */}
+          <p
+            className={`mt-12 md:mt-16 text-[12px] md:text-[13px] uppercase
+              tracking-[0.28em] text-[#F4EFE9]/65
+              transition-all duration-[1400ms] ease-out delay-150
+              ${textReady ? "opacity-100" : "opacity-0"}
+            `}
+          >
             Jodhpur · Slow mornings · Unhurried evenings
           </p>
 
