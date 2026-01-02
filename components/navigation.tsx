@@ -1,23 +1,62 @@
-// components/navigation.tsx
+"use client";
+
+import { useState } from "react";
 
 export default function Navigation() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="absolute top-0 left-0 w-full z-30 pointer-events-none">
-      <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
-        
-        {/* Logo */}
-        <div className="font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal text-[#F4EFE9]">
-          The Lazy Barn
+    <>
+      {/* Header */}
+      <header className="absolute top-0 left-0 w-full z-40 pointer-events-none">
+        <div className="flex items-center justify-between px-6 pt-10 md:px-16 md:pt-12 pointer-events-auto">
+          
+          {/* Logo */}
+          <div className="font-serif text-[17px] md:text-[20px] tracking-[0.04em] font-normal text-[#F4EFE9]/90">
+            The Lazy Barn
+          </div>
+
+          {/* Menu Trigger */}
+          <button
+            onClick={() => setOpen(true)}
+            className="text-[14px] md:text-[16px] tracking-[0.12em] font-normal text-[#F4EFE9]/90 hover:text-[#F4EFE9] transition-opacity duration-200"
+          >
+            MENU
+          </button>
         </div>
+      </header>
 
-        {/* Menu */}
-        <button
-          className="text-[14px] md:text-[16px] tracking-[0.12em] font-normal text-[#F4EFE9] hover:text-[#F4EFE9]/80 transition-opacity duration-200"
-        >
-          MENU
-        </button>
+      {/* Full-screen Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-50 bg-[#0f0f0f]/95 backdrop-blur-[2px] transition-opacity duration-500 ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex h-full items-center justify-center px-6">
+          <nav className="text-center">
+            <ul className="space-y-8">
+              {["Home", "About", "Gallery", "Menu", "Visit"].map((item) => (
+                <li key={item}>
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="font-serif text-[32px] md:text-[48px] tracking-[0.04em] text-[#F4EFE9]/90 hover:text-[#F4EFE9] transition-opacity duration-300"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
 
+            {/* Close */}
+            <button
+              onClick={() => setOpen(false)}
+              className="mt-16 text-[12px] tracking-[0.2em] uppercase text-[#F4EFE9]/50 hover:text-[#F4EFE9]/80 transition-opacity"
+            >
+              Close
+            </button>
+          </nav>
+        </div>
       </div>
-    </header>
+    </>
   );
 }
