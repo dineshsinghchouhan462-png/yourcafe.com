@@ -4,28 +4,28 @@ import { useEffect, useRef, useState } from "react";
 
 const menuItems = [
   {
-    title: "Citrus Mint Spritz",
+    title: "Virgin Mojito",
     description:
-      "Bright, refreshing, and gently layered — a quiet companion to slow afternoons.",
-    image: "/images/menu-1.jpg",
+      "Fresh mint, citrus lift, and gentle sparkle — clean, cooling, and unhurried.",
+    image: "/images/virgin-mojito.jpg",
   },
   {
     title: "House Brewed Cold Coffee",
     description:
       "Slow-steeped for depth and balance, finished with a soft, lingering finish.",
-    image: "/images/menu-2.jpg",
+    image: "/images/house-brewed-cold-coffee.jpg",
+  },
+  {
+    title: "Biscoff Iced Latte",
+    description:
+      "Creamy iced coffee layered with caramel warmth and subtle spice.",
+    image: "/images/biscoff-iced-latte.jpg",
   },
   {
     title: "Pan Asian Comfort Bowl",
     description:
-      "Warm, familiar flavors crafted with restraint and care.",
-    image: "/images/menu-3.jpg",
-  },
-  {
-    title: "Signature Desserts",
-    description:
-      "Delicate sweetness designed to be shared, not rushed.",
-    image: "/images/menu-4.jpg",
+      "Warm noodles, balanced sauces, and familiar flavors crafted with care.",
+    image: "/images/pan-asian-comfort-bowl.jpg",
   },
 ];
 
@@ -51,7 +51,6 @@ export default function Menu() {
   return (
     <section ref={sectionRef} className="bg-[#f7f4ef]">
       <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-40 md:py-56">
-
         {/* Section Intro */}
         <div
           className={`
@@ -82,10 +81,12 @@ export default function Menu() {
             >
               {/* Image */}
               <div className="w-full md:w-1/2">
-                <div className="
+                <div
+                  className="
                   relative overflow-hidden rounded-[28px]
                   transition-transform duration-[1200ms] ease-out
-                ">
+                "
+                >
                   <img
                     src={item.image}
                     alt={item.title}
@@ -137,4 +138,4 @@ export default function Menu() {
       </div>
     </section>
   );
-      }
+}
