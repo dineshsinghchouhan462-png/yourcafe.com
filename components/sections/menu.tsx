@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const menuItems = [
   {
@@ -31,8 +32,12 @@ const menuItems = [
 
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visible, setVisible] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const router = useRouter();
 
+  /* ---------- Reveal on enter ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -48,15 +53,51 @@ export default function Menu() {
     return () => observer.disconnect();
   }, []);
 
+  /* ---------- Scroll-linked parallax ---------- */
+  useEffect(() => {
+    const handleScroll = () => {
+      imageRefs.current.forEach((el) => {
+        if (!el) return;
+
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const progress = (windowHeight - rect.top) / windowHeight;
+          const translateY = Math.min(Math.max(progress * 10, -8), 12);
+          el.style.transform = `translateY(${translateY}px)`;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ---------- Page transition ---------- */
+  const handleFullMenu = () => {
+    setLeaving(true);
+    setTimeout(() => {
+      router.push("/menu");
+    }, 520);
+  };
+
   return (
-    <section ref={sectionRef} className="bg-[#f7f4ef]">
+    <section
+      ref={sectionRef}
+      className={`
+        bg-[#f7f4ef]
+        transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)]
+        ${leaving ? "opacity-0 scale-[0.985]" : "opacity-100 scale-100"}
+      `}
+    >
       <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-40 md:py-56">
         {/* Section Intro */}
         <div
           className={`
             text-center mb-32
             transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
-            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
           `}
         >
           <p className="text-[13px] tracking-[0.22em] uppercase text-gray-500 mb-6">
@@ -75,54 +116,41 @@ export default function Menu() {
               className={`
                 flex flex-col md:flex-row gap-16 md:gap-24 items-center
                 transition-all duration-[1600ms] ease-[cubic-bezier(.16,1,.3,1)]
-                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-14"}
               `}
               style={{ transitionDelay: `${i * 220}ms` }}
             >
-              {/* Image */}
+              {/* Image with editorial mask */}
               <div className="w-full md:w-1/2">
                 <div
-                  className="
+                  ref={(el) => (imageRefs.current[i] = el)}
+                  className={`
                     relative overflow-hidden rounded-[30px]
                     will-change-transform
-                    transition-transform duration-[1800ms] ease-[cubic-bezier(.16,1,.3,1)]
-                    hover:scale-[1.015]
-                  "
+                  `}
                 >
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="
+                    className={`
                       w-full h-auto
-                      transition-transform duration-[2200ms] ease-[cubic-bezier(.16,1,.3,1)]
-                      hover:scale-[1.06]
-                    "
+                      transition-[clip-path,transform]
+                      duration-[1800ms]
+                      ease-[cubic-bezier(.16,1,.3,1)]
+                      ${visible
+                        ? "clip-path-reveal scale-100"
+                        : "clip-path-hidden scale-[1.03]"}
+                    `}
                   />
                 </div>
               </div>
 
               {/* Text */}
               <div className="w-full md:w-1/2 text-center md:text-left">
-                <h3
-                  className={`
-                    font-serif text-[28px] md:text-[32px] mb-4 text-gray-900
-                    transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
-                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
-                  `}
-                  style={{ transitionDelay: `${i * 220 + 120}ms` }}
-                >
+                <h3 className="font-serif text-[28px] md:text-[32px] mb-4 text-gray-900">
                   {item.title}
                 </h3>
-
-                <p
-                  className={`
-                    text-[15px] md:text-[16px] leading-[1.8] text-gray-600 max-w-[420px]
-                    mx-auto md:mx-0
-                    transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
-                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
-                  `}
-                  style={{ transitionDelay: `${i * 220 + 260}ms` }}
-                >
+                <p className="text-[15px] md:text-[16px] leading-[1.8] text-gray-600 max-w-[420px] mx-auto md:mx-0">
                   {item.description}
                 </p>
               </div>
@@ -131,17 +159,10 @@ export default function Menu() {
         </div>
 
         {/* Full Menu Link */}
-        <div
-          className={`
-            mt-44 text-center
-            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
-            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-          `}
-        >
-          <a
-            href="#"
+        <div className="mt-44 text-center">
+          <button
+            onClick={handleFullMenu}
             className="
-              inline-block
               text-[13px]
               tracking-[0.28em]
               uppercase
@@ -151,9 +172,19 @@ export default function Menu() {
             "
           >
             View full menu
-          </a>
+          </button>
         </div>
       </div>
+
+      {/* Mask utilities */}
+      <style jsx>{`
+        .clip-path-hidden {
+          clip-path: inset(0 0 100% 0);
+        }
+        .clip-path-reveal {
+          clip-path: inset(0 0 0 0);
+        }
+      `}</style>
     </section>
   );
 }
