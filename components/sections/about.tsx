@@ -6,6 +6,7 @@ export default function About() {
   const imageRef = useRef<HTMLDivElement>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  // Subtle scroll-based parallax (unchanged, already correct)
   useEffect(() => {
     const handleScroll = () => {
       if (!imageRef.current) return;
@@ -26,13 +27,16 @@ export default function About() {
 
   return (
     <>
+      {/* Philosophy / Space Section */}
       <section className="bg-[#f7f4ef]">
-        <div className="
-          mx-auto max-w-[1200px]
-          px-6 md:px-16
-          pt-6 md:pt-10
-          pb-32 md:pb-40
-        ">
+        <div
+          className="
+            mx-auto max-w-[1200px]
+            px-6 md:px-16
+            pt-6 md:pt-10
+            pb-32 md:pb-40
+          "
+        >
           <div
             ref={imageRef}
             className="
@@ -49,31 +53,48 @@ export default function About() {
               src="/images/philosophy.jpg"
               alt="The Lazy Barn interior"
               className="
-                w-full h-auto
+                w-full
+                h-auto
                 transition-transform duration-[1400ms] ease-out
                 hover:scale-[1.03]
               "
             />
-            <div className="
-              pointer-events-none
-              absolute inset-0
-              bg-black/0
-              hover:bg-black/10
-              transition-colors duration-700
-            " />
+
+            {/* Soft material hover overlay */}
+            <div
+              className="
+                pointer-events-none
+                absolute inset-0
+                bg-black/0
+                hover:bg-black/10
+                transition-colors duration-700
+              "
+            />
           </div>
         </div>
       </section>
 
+      {/* IMMERSIVE LIGHTBOX — FIXED */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md"
+          className="
+            fixed inset-0 z-[999]
+            flex items-center justify-center
+            bg-black/90 backdrop-blur-md
+            px-4 md:px-12
+          "
           onClick={() => setLightboxOpen(false)}
         >
           <img
             src="/images/philosophy.jpg"
             alt="The Lazy Barn interior enlarged"
-            className="max-h-[90vh] max-w-[90vw] rounded-[24px] shadow-2xl"
+            className="
+              w-full
+              max-w-[1200px]
+              h-auto
+              rounded-[24px]
+              shadow-2xl
+            "
           />
         </div>
       )}
