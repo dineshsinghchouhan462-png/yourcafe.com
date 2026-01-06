@@ -41,7 +41,7 @@ export default function Menu() {
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -55,8 +55,8 @@ export default function Menu() {
         <div
           className={`
             text-center mb-32
-            transition-all duration-[1200ms] ease-out
-            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
           `}
         >
           <p className="text-[13px] tracking-[0.22em] uppercase text-gray-500 mb-6">
@@ -68,32 +68,34 @@ export default function Menu() {
         </div>
 
         {/* Menu Items */}
-        <div className="space-y-32">
+        <div className="space-y-36">
           {menuItems.map((item, i) => (
             <div
               key={i}
               className={`
-                flex flex-col md:flex-row gap-14 md:gap-20 items-center
-                transition-all duration-[1400ms] ease-out
-                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+                flex flex-col md:flex-row gap-16 md:gap-24 items-center
+                transition-all duration-[1600ms] ease-[cubic-bezier(.16,1,.3,1)]
+                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
               `}
-              style={{ transitionDelay: `${i * 180}ms` }}
+              style={{ transitionDelay: `${i * 220}ms` }}
             >
               {/* Image */}
               <div className="w-full md:w-1/2">
                 <div
                   className="
-                  relative overflow-hidden rounded-[28px]
-                  transition-transform duration-[1200ms] ease-out
-                "
+                    relative overflow-hidden rounded-[30px]
+                    will-change-transform
+                    transition-transform duration-[1800ms] ease-[cubic-bezier(.16,1,.3,1)]
+                    hover:scale-[1.015]
+                  "
                 >
                   <img
                     src={item.image}
                     alt={item.title}
                     className="
                       w-full h-auto
-                      transition-transform duration-[1600ms] ease-out
-                      hover:scale-[1.04]
+                      transition-transform duration-[2200ms] ease-[cubic-bezier(.16,1,.3,1)]
+                      hover:scale-[1.06]
                     "
                   />
                 </div>
@@ -101,10 +103,26 @@ export default function Menu() {
 
               {/* Text */}
               <div className="w-full md:w-1/2 text-center md:text-left">
-                <h3 className="font-serif text-[28px] md:text-[32px] mb-4 text-gray-900">
+                <h3
+                  className={`
+                    font-serif text-[28px] md:text-[32px] mb-4 text-gray-900
+                    transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+                  `}
+                  style={{ transitionDelay: `${i * 220 + 120}ms` }}
+                >
                   {item.title}
                 </h3>
-                <p className="text-[15px] md:text-[16px] leading-[1.7] text-gray-600 max-w-[420px] mx-auto md:mx-0">
+
+                <p
+                  className={`
+                    text-[15px] md:text-[16px] leading-[1.8] text-gray-600 max-w-[420px]
+                    mx-auto md:mx-0
+                    transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+                  `}
+                  style={{ transitionDelay: `${i * 220 + 260}ms` }}
+                >
                   {item.description}
                 </p>
               </div>
@@ -115,8 +133,8 @@ export default function Menu() {
         {/* Full Menu Link */}
         <div
           className={`
-            mt-40 text-center
-            transition-all duration-[1200ms] ease-out
+            mt-44 text-center
+            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
             ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
           `}
         >
@@ -125,7 +143,7 @@ export default function Menu() {
             className="
               inline-block
               text-[13px]
-              tracking-[0.22em]
+              tracking-[0.28em]
               uppercase
               text-gray-700
               hover:text-gray-900
