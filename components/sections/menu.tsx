@@ -37,7 +37,7 @@ export default function Menu() {
   const [leaving, setLeaving] = useState(false);
   const router = useRouter();
 
-  /* ---------- Reveal on enter ---------- */
+  /* Reveal on enter */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -53,7 +53,7 @@ export default function Menu() {
     return () => observer.disconnect();
   }, []);
 
-  /* ---------- Scroll-linked parallax ---------- */
+  /* Scroll-linked parallax */
   useEffect(() => {
     const handleScroll = () => {
       imageRefs.current.forEach((el) => {
@@ -74,7 +74,7 @@ export default function Menu() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ---------- Page transition ---------- */
+  /* Page transition */
   const handleFullMenu = () => {
     setLeaving(true);
     setTimeout(() => {
@@ -120,14 +120,11 @@ export default function Menu() {
               `}
               style={{ transitionDelay: `${i * 220}ms` }}
             >
-              {/* Image with editorial mask */}
+              {/* Image */}
               <div className="w-full md:w-1/2">
                 <div
                   ref={(el) => (imageRefs.current[i] = el)}
-                  className={`
-                    relative overflow-hidden rounded-[30px]
-                    will-change-transform
-                  `}
+                  className="relative overflow-hidden rounded-[30px] will-change-transform"
                 >
                   <img
                     src={item.image}
@@ -175,16 +172,6 @@ export default function Menu() {
           </button>
         </div>
       </div>
-
-      {/* Mask utilities */}
-      <style jsx>{`
-        .clip-path-hidden {
-          clip-path: inset(0 0 100% 0);
-        }
-        .clip-path-reveal {
-          clip-path: inset(0 0 0 0);
-        }
-      `}</style>
     </section>
   );
 }
