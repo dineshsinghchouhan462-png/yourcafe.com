@@ -38,14 +38,23 @@ export default function Menu() {
   const [leaving, setLeaving] = useState(false);
   const router = useRouter();
 
-  /* ---------- REVEAL (SAFE) ---------- */
+  /* ---------- SAFE VISIBILITY ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0, rootMargin: "-120px 0px -120px 0px" }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0,
+        rootMargin: "-120px 0px -120px 0px",
+      }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
+
     const fallback = setTimeout(() => setVisible(true), 900);
 
     return () => {
@@ -54,7 +63,7 @@ export default function Menu() {
     };
   }, []);
 
-  /* ---------- PREMIUM PARALLAX ---------- */
+  /* ---------- SUBTLE PARALLAX ---------- */
   useEffect(() => {
     const handleScroll = () => {
       imageRefs.current.forEach((img, i) => {
@@ -66,7 +75,6 @@ export default function Menu() {
 
         if (rect.top < vh && rect.bottom > 0) {
           const progress = (vh - rect.top) / vh;
-
           img.style.transform = `translateY(${progress * 10}px)`;
           text.style.transform = `translateY(${progress * 6}px)`;
         }
@@ -97,7 +105,7 @@ export default function Menu() {
         <div
           className={`
             text-center mb-28
-            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+            transition-all duration-[1200ms] ease-[cubic-bezier(.16,1,.3,1)]
             ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
           `}
         >
@@ -124,13 +132,10 @@ export default function Menu() {
               {/* IMAGE */}
               <div className="w-full md:w-1/2">
                 <div
-                  ref={(el) => (imageRefs.current[i] = el)}
-                  className="
-                    relative overflow-hidden rounded-[30px]
-                    transition-transform duration-[1200ms]
-                    hover:scale-[1.015]
-                    hover:shadow-[0_28px_80px_rgba(0,0,0,0.18)]
-                  "
+                  ref={(el) => {
+                    imageRefs.current[i] = el;
+                  }}
+                  className="relative overflow-hidden rounded-[30px]"
                 >
                   <img
                     src={item.image}
@@ -142,7 +147,7 @@ export default function Menu() {
                       ease-[cubic-bezier(.16,1,.3,1)]
                       ${visible
                         ? "clip-path-reveal scale-100"
-                        : "clip-path-hidden scale-[1.05]"}
+                        : "clip-path-hidden scale-[1.04]"}
                     `}
                   />
                 </div>
@@ -150,7 +155,9 @@ export default function Menu() {
 
               {/* TEXT */}
               <div
-                ref={(el) => (textRefs.current[i] = el)}
+                ref={(el) => {
+                  textRefs.current[i] = el;
+                }}
                 className="w-full md:w-1/2 text-center md:text-left"
               >
                 <h3 className="font-serif text-[28px] md:text-[32px] mb-4 text-gray-900">
@@ -168,14 +175,7 @@ export default function Menu() {
         <div className="mt-40 text-center">
           <button
             onClick={handleFullMenu}
-            className="
-              text-[13px]
-              tracking-[0.28em]
-              uppercase
-              text-gray-700
-              hover:text-gray-900
-              transition-colors duration-500
-            "
+            className="text-[13px] tracking-[0.28em] uppercase text-gray-700 hover:text-gray-900 transition-colors duration-500"
           >
             View full menu
           </button>
