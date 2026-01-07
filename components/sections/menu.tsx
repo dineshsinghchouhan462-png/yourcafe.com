@@ -123,7 +123,9 @@ export default function Menu() {
               {/* Image */}
               <div className="w-full md:w-1/2">
                 <div
-                  ref={(el) => (imageRefs.current[i] = el)}
+                  ref={(el) => {
+                    imageRefs.current[i] = el;
+                  }}
                   className="relative overflow-hidden rounded-[30px] will-change-transform"
                 >
                   <img
