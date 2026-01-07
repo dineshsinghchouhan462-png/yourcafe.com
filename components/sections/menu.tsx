@@ -33,28 +33,19 @@ const menuItems = [
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const textRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const router = useRouter();
 
-  /* ---------- SAFE REVEAL (MOBILE + DESKTOP) ---------- */
+  /* ---------- REVEAL (SAFE) ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0,
-        rootMargin: "-120px 0px -120px 0px",
-      }
+      ([entry]) => entry.isIntersecting && setVisible(true),
+      { threshold: 0, rootMargin: "-120px 0px -120px 0px" }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-
-    // HARD FALLBACK (never blank section)
     const fallback = setTimeout(() => setVisible(true), 900);
 
     return () => {
@@ -63,19 +54,21 @@ export default function Menu() {
     };
   }, []);
 
-  /* ---------- SUBTLE PARALLAX ---------- */
+  /* ---------- PREMIUM PARALLAX ---------- */
   useEffect(() => {
     const handleScroll = () => {
-      imageRefs.current.forEach((el) => {
-        if (!el) return;
+      imageRefs.current.forEach((img, i) => {
+        const text = textRefs.current[i];
+        if (!img || !text) return;
 
-        const rect = el.getBoundingClientRect();
+        const rect = img.getBoundingClientRect();
         const vh = window.innerHeight;
 
         if (rect.top < vh && rect.bottom > 0) {
           const progress = (vh - rect.top) / vh;
-          const translateY = Math.min(Math.max(progress * 10, -6), 10);
-          el.style.transform = `translateY(${translateY}px)`;
+
+          img.style.transform = `translateY(${progress * 10}px)`;
+          text.style.transform = `translateY(${progress * 6}px)`;
         }
       });
     };
@@ -84,7 +77,6 @@ export default function Menu() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ---------- PAGE TRANSITION ---------- */
   const handleFullMenu = () => {
     setLeaving(true);
     setTimeout(() => router.push("/menu"), 500);
@@ -95,7 +87,7 @@ export default function Menu() {
       ref={sectionRef}
       className={`
         bg-[#f7f4ef]
-        transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)]
+        transition-all duration-700 ease-[cubic-bezier(.16,1,.3,1)]
         ${leaving ? "opacity-0 scale-[0.985]" : "opacity-100 scale-100"}
       `}
     >
@@ -105,8 +97,8 @@ export default function Menu() {
         <div
           className={`
             text-center mb-28
-            transition-all duration-[1200ms] ease-[cubic-bezier(.16,1,.3,1)]
-            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
           `}
         >
           <p className="text-[13px] tracking-[0.22em] uppercase text-gray-500 mb-6">
@@ -125,17 +117,20 @@ export default function Menu() {
               className={`
                 flex flex-col md:flex-row gap-16 md:gap-24 items-center
                 transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
-                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}
               `}
               style={{ transitionDelay: `${i * 160}ms` }}
             >
               {/* IMAGE */}
               <div className="w-full md:w-1/2">
                 <div
-                  ref={(el) => {
-                    imageRefs.current[i] = el;
-                  }}
-                  className="relative overflow-hidden rounded-[30px]"
+                  ref={(el) => (imageRefs.current[i] = el)}
+                  className="
+                    relative overflow-hidden rounded-[30px]
+                    transition-transform duration-[1200ms]
+                    hover:scale-[1.015]
+                    hover:shadow-[0_28px_80px_rgba(0,0,0,0.18)]
+                  "
                 >
                   <img
                     src={item.image}
@@ -147,14 +142,17 @@ export default function Menu() {
                       ease-[cubic-bezier(.16,1,.3,1)]
                       ${visible
                         ? "clip-path-reveal scale-100"
-                        : "clip-path-hidden scale-[1.04]"}
+                        : "clip-path-hidden scale-[1.05]"}
                     `}
                   />
                 </div>
               </div>
 
               {/* TEXT */}
-              <div className="w-full md:w-1/2 text-center md:text-left">
+              <div
+                ref={(el) => (textRefs.current[i] = el)}
+                className="w-full md:w-1/2 text-center md:text-left"
+              >
                 <h3 className="font-serif text-[28px] md:text-[32px] mb-4 text-gray-900">
                   {item.title}
                 </h3>
@@ -170,7 +168,14 @@ export default function Menu() {
         <div className="mt-40 text-center">
           <button
             onClick={handleFullMenu}
-            className="text-[13px] tracking-[0.28em] uppercase text-gray-700 hover:text-gray-900 transition-colors duration-500"
+            className="
+              text-[13px]
+              tracking-[0.28em]
+              uppercase
+              text-gray-700
+              hover:text-gray-900
+              transition-colors duration-500
+            "
           >
             View full menu
           </button>
