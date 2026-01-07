@@ -31,13 +31,13 @@ const menuItems = [
 ];
 
 export default function Menu() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const imageRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const router = useRouter();
 
-  /* Reveal on enter */
+  /* ---------- SAFE REVEAL (MOBILE + DESKTOP) ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -46,25 +46,35 @@ export default function Menu() {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      {
+        threshold: 0,
+        rootMargin: "-120px 0px -120px 0px",
+      }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+
+    // HARD FALLBACK (never blank section)
+    const fallback = setTimeout(() => setVisible(true), 900);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
   }, []);
 
-  /* Scroll-linked parallax */
+  /* ---------- SUBTLE PARALLAX ---------- */
   useEffect(() => {
     const handleScroll = () => {
       imageRefs.current.forEach((el) => {
         if (!el) return;
 
         const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
+        const vh = window.innerHeight;
 
-        if (rect.top < windowHeight && rect.bottom > 0) {
-          const progress = (windowHeight - rect.top) / windowHeight;
-          const translateY = Math.min(Math.max(progress * 10, -8), 12);
+        if (rect.top < vh && rect.bottom > 0) {
+          const progress = (vh - rect.top) / vh;
+          const translateY = Math.min(Math.max(progress * 10, -6), 10);
           el.style.transform = `translateY(${translateY}px)`;
         }
       });
@@ -74,12 +84,10 @@ export default function Menu() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Page transition */
+  /* ---------- PAGE TRANSITION ---------- */
   const handleFullMenu = () => {
     setLeaving(true);
-    setTimeout(() => {
-      router.push("/menu");
-    }, 520);
+    setTimeout(() => router.push("/menu"), 500);
   };
 
   return (
@@ -91,13 +99,13 @@ export default function Menu() {
         ${leaving ? "opacity-0 scale-[0.985]" : "opacity-100 scale-100"}
       `}
     >
-      <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-40 md:py-56">
+      <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-36 md:py-56">
 
-        {/* Section Intro */}
+        {/* INTRO */}
         <div
           className={`
-            text-center mb-32
-            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+            text-center mb-28
+            transition-all duration-[1200ms] ease-[cubic-bezier(.16,1,.3,1)]
             ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
           `}
         >
@@ -109,25 +117,25 @@ export default function Menu() {
           </h2>
         </div>
 
-        {/* Menu Items */}
-        <div className="space-y-36">
+        {/* ITEMS */}
+        <div className="space-y-32">
           {menuItems.map((item, i) => (
             <div
               key={i}
               className={`
                 flex flex-col md:flex-row gap-16 md:gap-24 items-center
-                transition-all duration-[1600ms] ease-[cubic-bezier(.16,1,.3,1)]
-                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-14"}
+                transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
               `}
-              style={{ transitionDelay: `${i * 220}ms` }}
+              style={{ transitionDelay: `${i * 160}ms` }}
             >
-              {/* Image */}
+              {/* IMAGE */}
               <div className="w-full md:w-1/2">
                 <div
                   ref={(el) => {
                     imageRefs.current[i] = el;
                   }}
-                  className="relative overflow-hidden rounded-[30px] will-change-transform"
+                  className="relative overflow-hidden rounded-[30px]"
                 >
                   <img
                     src={item.image}
@@ -135,17 +143,17 @@ export default function Menu() {
                     className={`
                       w-full h-auto
                       transition-[clip-path,transform]
-                      duration-[1800ms]
+                      duration-[1600ms]
                       ease-[cubic-bezier(.16,1,.3,1)]
                       ${visible
                         ? "clip-path-reveal scale-100"
-                        : "clip-path-hidden scale-[1.03]"}
+                        : "clip-path-hidden scale-[1.04]"}
                     `}
                   />
                 </div>
               </div>
 
-              {/* Text */}
+              {/* TEXT */}
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h3 className="font-serif text-[28px] md:text-[32px] mb-4 text-gray-900">
                   {item.title}
@@ -158,25 +166,18 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* Full Menu Link */}
-        <div className="mt-44 text-center">
+        {/* CTA */}
+        <div className="mt-40 text-center">
           <button
             onClick={handleFullMenu}
-            className="
-              text-[13px]
-              tracking-[0.28em]
-              uppercase
-              text-gray-700
-              hover:text-gray-900
-              transition-colors duration-500
-            "
+            className="text-[13px] tracking-[0.28em] uppercase text-gray-700 hover:text-gray-900 transition-colors duration-500"
           >
             View full menu
           </button>
         </div>
       </div>
 
-      {/* Image reveal masks */}
+      {/* MASK UTILITIES */}
       <style jsx>{`
         .clip-path-hidden {
           clip-path: inset(0 0 100% 0);
