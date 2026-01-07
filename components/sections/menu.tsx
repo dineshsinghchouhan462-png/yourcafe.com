@@ -32,7 +32,7 @@ const menuItems = [
 
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imageRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const router = useRouter();
@@ -92,6 +92,7 @@ export default function Menu() {
       `}
     >
       <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-40 md:py-56">
+
         {/* Section Intro */}
         <div
           className={`
@@ -174,6 +175,16 @@ export default function Menu() {
           </button>
         </div>
       </div>
+
+      {/* Image reveal masks */}
+      <style jsx>{`
+        .clip-path-hidden {
+          clip-path: inset(0 0 100% 0);
+        }
+        .clip-path-reveal {
+          clip-path: inset(0 0 0 0);
+        }
+      `}</style>
     </section>
   );
 }
