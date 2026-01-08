@@ -33,7 +33,6 @@ const menuItems = [
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const textRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const router = useRouter();
@@ -63,20 +62,17 @@ export default function Menu() {
     };
   }, []);
 
-  /* ---------- SUBTLE PARALLAX ---------- */
+  /* ---------- VERY SUBTLE PARALLAX ---------- */
   useEffect(() => {
     const handleScroll = () => {
-      imageRefs.current.forEach((img, i) => {
-        const text = textRefs.current[i];
-        if (!img || !text) return;
-
+      imageRefs.current.forEach((img) => {
+        if (!img) return;
         const rect = img.getBoundingClientRect();
         const vh = window.innerHeight;
 
         if (rect.top < vh && rect.bottom > 0) {
           const progress = (vh - rect.top) / vh;
-          img.style.transform = `translateY(${progress * 10}px)`;
-          text.style.transform = `translateY(${progress * 6}px)`;
+          img.style.transform = `translateY(${progress * 14}px)`;
         }
       });
     };
@@ -87,7 +83,7 @@ export default function Menu() {
 
   const handleFullMenu = () => {
     setLeaving(true);
-    setTimeout(() => router.push("/menu"), 500);
+    setTimeout(() => router.push("/menu"), 520);
   };
 
   return (
@@ -99,35 +95,35 @@ export default function Menu() {
         ${leaving ? "opacity-0 scale-[0.985]" : "opacity-100 scale-100"}
       `}
     >
-      <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-36 md:py-56">
+      <div className="mx-auto max-w-[1100px] px-6 md:px-16 py-40 md:py-[420px]">
 
         {/* INTRO */}
         <div
           className={`
-            text-center mb-28
-            transition-all duration-[1200ms] ease-[cubic-bezier(.16,1,.3,1)]
-            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+            text-center mb-[220px]
+            transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+            ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}
           `}
         >
-          <p className="text-[13px] tracking-[0.22em] uppercase text-gray-500 mb-6">
+          <p className="text-[12px] tracking-[0.28em] uppercase text-gray-500 mb-6">
             Signature Selections
           </p>
-          <h2 className="font-serif text-[38px] md:text-[52px] leading-[1.1] text-gray-900">
+          <h2 className="font-serif text-[40px] md:text-[56px] leading-[1.05] tracking-[-0.01em] text-[#1f1f1f]">
             Crafted with intention
           </h2>
         </div>
 
         {/* ITEMS */}
-        <div className="space-y-32">
+        <div className="space-y-[220px]">
           {menuItems.map((item, i) => (
             <div
               key={i}
               className={`
-                flex flex-col md:flex-row gap-16 md:gap-24 items-center
-                transition-all duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
-                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}
+                flex flex-col md:flex-row gap-20 md:gap-28 items-start
+                transition-all duration-[1600ms] ease-[cubic-bezier(.16,1,.3,1)]
+                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}
               `}
-              style={{ transitionDelay: `${i * 160}ms` }}
+              style={{ transitionDelay: `${i * 180}ms` }}
             >
               {/* IMAGE */}
               <div className="w-full md:w-1/2">
@@ -135,35 +131,50 @@ export default function Menu() {
                   ref={(el) => {
                     imageRefs.current[i] = el;
                   }}
-                  className="relative overflow-hidden rounded-[30px]"
+                  className="
+                    relative overflow-hidden rounded-[36px]
+                    bg-[#efece6]
+                    shadow-[0_48px_140px_rgba(0,0,0,0.28)]
+                    transition-transform duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)]
+                    hover:scale-[1.02]
+                  "
                 >
                   <img
                     src={item.image}
                     alt={item.title}
                     className={`
                       w-full h-auto
+                      scale-[1.04]
                       transition-[clip-path,transform]
-                      duration-[1600ms]
+                      duration-[2000ms]
                       ease-[cubic-bezier(.16,1,.3,1)]
                       ${visible
                         ? "clip-path-reveal scale-100"
-                        : "clip-path-hidden scale-[1.04]"}
+                        : "clip-path-hidden scale-[1.08]"}
                     `}
                   />
                 </div>
               </div>
 
               {/* TEXT */}
-              <div
-                ref={(el) => {
-                  textRefs.current[i] = el;
-                }}
-                className="w-full md:w-1/2 text-center md:text-left"
-              >
-                <h3 className="font-serif text-[28px] md:text-[32px] mb-4 text-gray-900">
+              <div className="w-full md:w-1/2 md:pt-14">
+                <h3 className="
+                  font-serif
+                  text-[30px] md:text-[36px]
+                  leading-[1.15]
+                  tracking-[-0.01em]
+                  mb-8
+                  text-[#1f1f1f]
+                ">
                   {item.title}
                 </h3>
-                <p className="text-[15px] md:text-[16px] leading-[1.8] text-gray-600 max-w-[420px] mx-auto md:mx-0">
+
+                <p className="
+                  text-[15px] md:text-[17px]
+                  leading-[1.9]
+                  text-[#4a4a4a]
+                  max-w-[420px]
+                ">
                   {item.description}
                 </p>
               </div>
@@ -172,10 +183,17 @@ export default function Menu() {
         </div>
 
         {/* CTA */}
-        <div className="mt-40 text-center">
+        <div className="mt-[260px] text-center">
           <button
             onClick={handleFullMenu}
-            className="text-[13px] tracking-[0.28em] uppercase text-gray-700 hover:text-gray-900 transition-colors duration-500"
+            className="
+              text-[12px]
+              tracking-[0.32em]
+              uppercase
+              text-[#3a3a3a]
+              hover:text-[#1f1f1f]
+              transition-colors duration-500
+            "
           >
             View full menu
           </button>
