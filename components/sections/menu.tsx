@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 const menuItems = [
   {
     title: "Virgin Mojito",
@@ -31,7 +33,6 @@ export default function Menu() {
   return (
     <section className="menu-surface">
       <div className="menu-container">
-
         {/* INTRO */}
         <div className="menu-intro reveal">
           <p className="menu-eyebrow">Signature Selections</p>
@@ -42,7 +43,6 @@ export default function Menu() {
         <div className="menu-list">
           {menuItems.map((item, i) => (
             <div key={i} className="menu-item reveal delay">
-              
               {/* IMAGE */}
               <div className="menu-image-wrap">
                 <img
@@ -57,16 +57,16 @@ export default function Menu() {
                 <h3 className="menu-item-title">{item.title}</h3>
                 <p className="menu-item-desc">{item.description}</p>
               </div>
-
             </div>
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA — FIXED */}
         <div className="menu-cta reveal">
-          <button className="menu-link">View full menu</button>
+          <Link href="/menu" className="menu-link">
+            View full menu
+          </Link>
         </div>
-
       </div>
     </section>
   );
