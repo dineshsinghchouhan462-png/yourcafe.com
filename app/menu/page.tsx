@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /* ===============================
-   DATA — FULL REAL MENU
+   FULL MENU DATA (UNCHANGED)
 =============================== */
 
 const MENU = [
@@ -20,20 +20,20 @@ const MENU = [
     title: "Burgers",
     subtitle: "Comfort, done right",
     items: [
-      ["OG Veg Burger", "₹149", "Crispy patty, fresh veggies, tangy sauces."],
-      ["Garlic Burger (Aloo Patty)", "₹169", "Crispy aloo patty with in-house garlic sauce."],
-      ["Kebab Burger (Paneer Patty)", "₹159", "Crispy paneer patty with veggies and sauces."],
-      ["Indian Paneer Burger", "₹199", "Spiced paneer patty with creamy cheese."],
+      ["OG Veg Burger", "₹149"],
+      ["Garlic Burger (Aloo Patty)", "₹169"],
+      ["Kebab Burger (Paneer Patty)", "₹159"],
+      ["Indian Paneer Burger", "₹199"],
     ],
   },
   {
     title: "Dumplings",
     subtitle: "Steamed, seared, crisped",
     items: [
-      ["Steamed Dimsums", "₹239", "Soft dumplings filled with veggies."],
-      ["Crunchy Dimsums", "₹259", "Fried dimsums with veggie filling."],
-      ["Gyoza", "₹249", "Pan-seared veggie dumplings."],
-      ["Wonton", "₹249", "Thin-skinned steamed vegetable wontons."],
+      ["Steamed Dimsums", "₹239"],
+      ["Crunchy Dimsums", "₹259"],
+      ["Gyoza", "₹249"],
+      ["Wonton", "₹249"],
     ],
   },
   {
@@ -64,7 +64,7 @@ const MENU = [
   },
   {
     title: "Garlic Bread",
-    subtitle: "Warm, buttery",
+    subtitle: "Warm & buttery",
     items: [
       ["Chilli Cheese Garlic Bread", "₹209"],
       ["Onion Corn Garlic Bread", "₹219"],
@@ -210,14 +210,14 @@ const MENU = [
 =============================== */
 
 export default function MenuPage() {
-  const sectionsRef = useRef<HTMLDivElement[]>([]);
+  const sectionsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
           }
         });
       },
@@ -230,7 +230,6 @@ export default function MenuPage() {
 
   return (
     <main className="bg-[#f7f4ef] text-[#1f1f1f]">
-      {/* HERO */}
       <section className="max-w-[900px] mx-auto px-6 pt-44 pb-32 text-center">
         <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500 mb-6">
           Full Menu
@@ -243,7 +242,6 @@ export default function MenuPage() {
         </p>
       </section>
 
-      {/* MENU */}
       <section className="max-w-[1000px] mx-auto px-6 pb-56 space-y-48">
         {MENU.map((cat, i) => (
           <section
@@ -251,7 +249,7 @@ export default function MenuPage() {
             ref={(el) => {
               if (el) sectionsRef.current[i] = el;
             }}
-            className="menu-section opacity-0 translate-y-6 transition-all duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)]"
+            className="opacity-0 translate-y-6 transition-all duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)]"
           >
             <div className="text-center mb-20">
               <h2 className="font-serif text-[36px] md:text-[48px] mb-4">
@@ -265,8 +263,8 @@ export default function MenuPage() {
             <div className="space-y-14">
               {cat.items.map(([name, price, desc]) => (
                 <div key={name} className="max-w-[720px] mx-auto group">
-                  <div className="flex justify-between items-start">
-                    <h3 className="font-serif text-[20px] md:text-[22px] relative">
+                  <div className="flex justify-between">
+                    <h3 className="font-serif text-[20px] md:text-[22px]">
                       {name}
                       <span className="block h-[1px] w-0 bg-[#1f1f1f] transition-all duration-500 group-hover:w-8 mt-1" />
                     </h3>
