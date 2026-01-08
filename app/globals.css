@@ -8,7 +8,7 @@
 
 body {
   background: transparent;
-  color: #2a2a2a; /* softened for print-like luxury */
+  color: #2a2a2a;
 }
 
 /* =================================
@@ -26,14 +26,11 @@ body {
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
 }
 
-/* Header sizing & rhythm */
 .header-inner {
   height: 88px;
   padding-top: 12px;
   padding-bottom: 12px;
-  transition:
-    height 0.8s ease,
-    padding 0.8s ease;
+  transition: height 0.8s ease, padding 0.8s ease;
 }
 
 .header-scrolled .header-inner {
@@ -43,57 +40,31 @@ body {
 }
 
 /* =================================
-   LOGO — BRAND OBJECT (NO UI)
+   LOGO — BRAND OBJECT
 ================================= */
 
 .logo-mark {
   height: 34px;
   width: auto;
-
   filter:
     drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45))
     drop-shadow(0 0 14px rgba(255, 205, 120, 0.35));
-
-  transition:
-    transform 0.9s ease,
-    opacity 0.9s ease,
-    filter 0.9s ease;
+  transition: transform 0.9s ease, opacity 0.9s ease, filter 0.9s ease;
 }
 
 /* =================================
-   MENU TEXT — EDITORIAL
-================================= */
-
-.menu-text {
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.menu-top {
-  color: rgba(244, 239, 233, 0.8);
-}
-
-.menu-scrolled {
-  color: rgba(234, 230, 223, 0.9);
-}
-
-/* =================================
-   INTRO SURFACE — LUXURY EDITORIAL
+   INTRO SURFACE
 ================================= */
 
 .intro-surface {
-  background-color: #f7f4ef; /* warm paper tone */
+  background-color: #f7f4ef;
 }
 
-/* Intro typography on paper-like surface */
 .intro-text {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-
   font-size: 20px;
   line-height: 1.75;
   letter-spacing: 0.01em;
-
   color: #2a2a2a;
 }
 
@@ -105,8 +76,7 @@ body {
 }
 
 /* =================================
-   EDITORIAL IMAGE REVEAL (APP ROUTER SAFE)
-   REQUIRED FOR MENU SECTION
+   EDITORIAL IMAGE REVEAL
 ================================= */
 
 .clip-path-hidden {
