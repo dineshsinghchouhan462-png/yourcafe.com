@@ -2,14 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
+type MenuItemType = {
+  name: string;
+  price: string;
+  desc?: string;
+};
+
 type Category = {
   title: string;
   subtitle: string;
-  items: {
-    name: string;
-    price: string;
-    desc?: string;
-  }[];
+  items: MenuItemType[];
 };
 
 const MENU: Category[] = [
@@ -17,9 +19,21 @@ const MENU: Category[] = [
     title: "Bao",
     subtitle: "Soft buns, bold fillings",
     items: [
-      { name: "BBQ Bao", price: "₹259", desc: "Bao buns filled with BBQ-flavoured veggies, crunchy slaw, and zingy sauce." },
-      { name: "Crispy Paneer Bao", price: "₹279", desc: "Crispy paneer, fresh slaw, and spicy mayo." },
-      { name: "Crispy Veg Bao", price: "₹269", desc: "Crispy veg patty with crunchy slaw and sauces." },
+      {
+        name: "BBQ Bao",
+        price: "₹259",
+        desc: "Bao buns filled with BBQ-flavoured veggies, crunchy slaw, and zingy sauce.",
+      },
+      {
+        name: "Crispy Paneer Bao",
+        price: "₹279",
+        desc: "Crispy paneer, fresh slaw, and spicy mayo.",
+      },
+      {
+        name: "Crispy Veg Bao",
+        price: "₹269",
+        desc: "Crispy veg patty with crunchy slaw and sauces.",
+      },
     ],
   },
   {
@@ -42,7 +56,6 @@ const MENU: Category[] = [
       { name: "Wonton", price: "₹249" },
     ],
   },
-  // 👉 continue adding remaining categories here (structure stays same)
 ];
 
 export default function MenuPage() {
@@ -63,15 +76,17 @@ export default function MenuPage() {
       { threshold: 0.25 }
     );
 
-    sectionsRef.current.forEach((el) => el && observer.observe(el));
+    sectionsRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <main className="bg-[#f7f4ef] text-[#1f1f1f] relative">
-
       {/* ===============================
-          STICKY CATEGORY INDEX (SUBTLE)
+          STICKY CATEGORY INDEX
       =============================== */}
       <aside className="hidden md:block fixed left-6 top-1/2 -translate-y-1/2 z-40">
         <ul className="space-y-3 text-[11px] tracking-[0.22em] uppercase text-gray-400">
@@ -96,7 +111,9 @@ export default function MenuPage() {
           Full Menu
         </p>
         <h1 className="font-serif text-[42px] md:text-[56px] leading-[1.05] mb-10">
-          Thoughtfully crafted.<br />Served without hurry.
+          Thoughtfully crafted.
+          <br />
+          Served without hurry.
         </h1>
         <p className="text-[13px] tracking-[0.18em] uppercase text-gray-500">
           All dishes are vegetarian
@@ -111,7 +128,9 @@ export default function MenuPage() {
           <section
             key={cat.title}
             data-index={i}
-            ref={(el) => (sectionsRef.current[i] = el)}
+            ref={(el) => {
+              sectionsRef.current[i] = el;
+            }}
             className="opacity-0 translate-y-6 transition-all duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)]"
           >
             <div className="text-center mb-20">
@@ -135,7 +154,8 @@ export default function MenuPage() {
                     <span
                       className="text-[15px] text-gray-600 opacity-0 translate-y-1"
                       style={{
-                        animation: "priceIn 600ms cubic-bezier(.16,1,.3,1) forwards",
+                        animation:
+                          "priceIn 600ms cubic-bezier(.16,1,.3,1) forwards",
                         animationDelay: "120ms",
                       }}
                     >
@@ -156,7 +176,7 @@ export default function MenuPage() {
       </section>
 
       {/* ===============================
-          KEYFRAMES (INLINE SAFE)
+          KEYFRAMES
       =============================== */}
       <style jsx>{`
         @keyframes priceIn {
