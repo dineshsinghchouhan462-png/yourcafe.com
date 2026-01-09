@@ -1,95 +1,53 @@
-"use client";
+<section className="bg-[#f7f4ef] text-[#1f1f1f]">
+  <div className="max-w-[900px] mx-auto px-6 pt-40 pb-48 text-center">
 
-import { useEffect, useRef, useState } from "react";
+    {/* Eyebrow */}
+    <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500 mb-6">
+      Delivery
+    </p>
 
-export default function Delivery() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
+    {/* Title */}
+    <h2 className="font-serif text-[42px] md:text-[56px] leading-[1.05] mb-10">
+      Enjoy The Lazy Barn<br />wherever you are
+    </h2>
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
+    {/* Description */}
+    <p className="max-w-[520px] mx-auto text-[16px] leading-[1.9] text-gray-600">
+      Our menu is available for delivery through trusted partners.
+      Prepared with the same care, packed gently, and meant to be enjoyed unhurried.
+    </p>
 
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+    {/* Delivery Partners */}
+    <div className="flex justify-center gap-16 mt-24">
 
-  return (
-    <section className="bg-[#f7f4ef]">
-      <div
-        ref={ref}
-        className={`
-          max-w-[900px] mx-auto px-6 md:px-16
-          py-44 md:py-56 text-center
-          transition-all duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)]
-          ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-        `}
+      <a
+        href="https://www.zomato.com/jodhpur/the-lazy-barn-3-ratanada/order"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-serif text-[18px] tracking-wide
+                   transition-all duration-300
+                   hover:opacity-60"
       >
-        {/* Eyebrow */}
-        <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500 mb-6">
-          Delivery
-        </p>
+        Zomato
+      </a>
 
-        {/* Title */}
-        <h2 className="font-serif text-[36px] md:text-[48px] leading-[1.05] mb-10 text-[#1f1f1f]">
-          Enjoy The Lazy Barn
-          <br />
-          wherever you are
-        </h2>
+      <a
+        href="https://www.swiggy.com/city/jodhpur/the-lazy-barn-new-jodhpur-rest992096"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-serif text-[18px] tracking-wide
+                   transition-all duration-300
+                   hover:opacity-60"
+      >
+        Swiggy
+      </a>
 
-        {/* Copy */}
-        <p className="text-[15px] md:text-[16px] leading-[1.9] text-gray-600 max-w-[560px] mx-auto mb-20">
-          Our menu is available for delivery through trusted partners.
-          Prepared with the same care, packed gently, and meant to be enjoyed unhurried.
-        </p>
+    </div>
 
-        {/* Platforms */}
-        <div className="flex items-center justify-center gap-12 mb-24">
-          {["Zomato", "Swiggy"].map((platform) => (
-            <span
-              key={platform}
-              className="
-                font-serif text-[18px] text-gray-700
-                relative group cursor-default
-              "
-            >
-              {platform}
-              <span
-                className="
-                  absolute left-0 -bottom-1 h-[1px] w-0 bg-gray-700
-                  transition-all duration-500
-                  group-hover:w-full
-                "
-              />
-            </span>
-          ))}
-        </div>
+    {/* Micro Line */}
+    <p className="mt-28 text-[12px] tracking-[0.32em] uppercase text-gray-500">
+      Order Online
+    </p>
 
-        {/* CTA */}
-        <div>
-          <a
-            href="#"
-            className="
-              inline-block
-              text-[12px]
-              tracking-[0.32em]
-              uppercase
-              text-gray-700
-              transition-all duration-500
-              hover:text-[#1f1f1f]
-            "
-          >
-            Order online
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
+  </div>
+</section>
