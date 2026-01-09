@@ -3,7 +3,7 @@
 export default function Delivery() {
   return (
     <section className="bg-[#f7f4ef] text-[#1f1f1f]">
-      <div className="max-w-[900px] mx-auto px-6 pt-44 pb-40 text-center">
+      <div className="max-w-[900px] mx-auto px-6 pb-40 text-center">
 
         <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500 mb-6">
           Delivery
