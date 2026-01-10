@@ -3,85 +3,104 @@
 export default function Contact() {
   return (
     <section className="bg-[#f7f4ef] text-[#1f1f1f]">
-      <div className="max-w-[900px] mx-auto px-6 py-40 text-center">
+      <div className="max-w-[900px] mx-auto px-6 pt-40 pb-40 space-y-24">
 
-        {/* Eyebrow */}
-        <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500 mb-6">
-          Contact
-        </p>
+        {/* ADDRESS */}
+        <div className="space-y-6">
+          <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
+            Address
+          </p>
 
-        {/* Heading */}
-        <h2 className="font-serif text-[42px] md:text-[56px] leading-[1.05] mb-12">
-          Visit. Call. Connect.
-        </h2>
+          <p className="text-[18px] leading-[1.9] text-gray-600 max-w-[520px]">
+            The Lazy Barn<br />
+            Sabji Mandi, opposite Ratanda,<br />
+            above Marwar Sweets,<br />
+            Prajapat Colony, Ratanada,<br />
+            Jodhpur, Rajasthan 342001
+          </p>
+        </div>
 
-        {/* Description */}
-        <p className="max-w-[520px] mx-auto text-[16px] leading-[1.9] text-gray-600 mb-20">
-          We’d love to welcome you at The Lazy Barn.
-          Reach out for reservations, directions, or any questions.
-        </p>
+        {/* HOURS */}
+        <div className="space-y-4">
+          <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
+            Hours
+          </p>
 
-        {/* CONTACT GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 text-left max-w-[720px] mx-auto">
+          <p className="text-[18px]">
+            Everyday<br />
+            <span className="text-gray-700">11:00 AM – 11:30 PM</span>
+          </p>
+        </div>
 
-          {/* ADDRESS */}
-          <div>
-            <p className="text-[12px] tracking-[0.28em] uppercase text-gray-500 mb-4">
-              Address
-            </p>
-            <a
-              href="https://maps.google.com/?q=The Lazy Barn Jodhpur"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-[17px] leading-[1.8] hover:opacity-80 transition-opacity"
-            >
-              The Lazy Barn<br />
-           Sabji Mandi, opposite Ratanda, above Marwar Sweets, Prajapat Colony,<br />  Ratanada, Jodhpur, Rajasthan 342001    
-              Rajasthan
-            </a>
-          </div>
+        {/* CALL */}
+        <div className="space-y-4">
+          <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
+            Call
+          </p>
 
-          {/* HOURS */}
-          <div>
-            <p className="text-[12px] tracking-[0.28em] uppercase text-gray-500 mb-4">
-              Hours
-            </p>
-            <p className="text-[17px] leading-[1.8]">
-              Everyday<br />
-              11:00 AM – 11:00 PM
-            </p>
-          </div>
+          <a
+            href="tel:+918890667769"
+            className="group inline-flex items-center gap-6 text-[20px]"
+          >
+            <span className="transition-opacity duration-300 group-hover:opacity-80">
+              +91 88906 67769
+            </span>
+            <span className="block h-[1px] w-10 bg-[#1f1f1f] transition-all duration-300 group-hover:w-16" />
+          </a>
+        </div>
 
-          {/* PHONE */}
-          <div>
-            <p className="text-[12px] tracking-[0.28em] uppercase text-gray-500 mb-4">
-              Call
-            </p>
-            <a
-              href="tel:+91XXXXXXXXXX"
-              className="inline-flex items-center gap-3 text-[17px] hover:opacity-80 transition-opacity"
-            >
-              +91 XXXXX XXXXX
-              <span className="block h-[1px] w-8 bg-[#1f1f1f]" />
-            </a>
-          </div>
+        {/* WHATSAPP */}
+        <div className="space-y-4">
+          <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
+            WhatsApp
+          </p>
 
-          {/* WHATSAPP */}
-          <div>
-            <p className="text-[12px] tracking-[0.28em] uppercase text-gray-500 mb-4">
-              WhatsApp
-            </p>
-            <a
-              href="https://wa.me/91XXXXXXXXXX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 text-[17px] hover:opacity-80 transition-opacity"
-            >
+          <a
+            href="https://wa.me/918890667769"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-6 text-[18px]"
+          >
+            <span className="transition-opacity duration-300 group-hover:opacity-80">
               Chat on WhatsApp
-              <span className="block h-[1px] w-8 bg-[#1f1f1f]" />
+            </span>
+            <span className="block h-[1px] w-10 bg-[#1f1f1f] transition-all duration-300 group-hover:w-16" />
+          </a>
+        </div>
+
+        {/* DELIVERY CTA */}
+        <div className="space-y-10 pt-10">
+          <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500 text-center">
+            Order Online
+          </p>
+
+          <div className="flex flex-col items-center gap-8">
+            <a
+              href="https://www.zomato.com/jodhpur/the-lazy-barn-3-ratanada/order"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-6 text-[15px] tracking-[0.24em] uppercase"
+            >
+              <span className="opacity-70 group-hover:opacity-100 transition-opacity">
+                Order on
+              </span>
+              <span className="font-medium">Zomato</span>
+              <span className="block h-[1px] w-10 bg-[#1f1f1f] transition-all duration-300 group-hover:w-16" />
+            </a>
+
+            <a
+              href="https://www.swiggy.com/city/jodhpur/the-lazy-barn-new-jodhpur-rest992096"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-6 text-[15px] tracking-[0.24em] uppercase"
+            >
+              <span className="opacity-70 group-hover:opacity-100 transition-opacity">
+                Order on
+              </span>
+              <span className="font-medium">Swiggy</span>
+              <span className="block h-[1px] w-10 bg-[#1f1f1f] transition-all duration-300 group-hover:w-16" />
             </a>
           </div>
-
         </div>
 
       </div>
