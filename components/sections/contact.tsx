@@ -11,7 +11,7 @@ export default function Contact() {
             Address
           </p>
 
-          <p className="text-[18px] leading-[1.9] text-gray-600 max-w-[520px]">
+          <p className="font-serif text-[18px] leading-[1.9] text-gray-600 max-w-[520px]">
             The Lazy Barn<br />
             Sabji Mandi, opposite Ratanda,<br />
             above Marwar Sweets,<br />
@@ -38,7 +38,7 @@ export default function Contact() {
             Hours
           </p>
 
-          <p className="text-[18px] text-gray-700">
+          <p className="font-serif text-[18px] text-gray-700">
             Everyday<br />
             11:00 AM – 11:30 PM
           </p>
@@ -52,7 +52,7 @@ export default function Contact() {
 
           <a
             href="tel:+918890667769"
-            className="group inline-flex items-center gap-6 text-[20px]"
+            className="group inline-flex items-center gap-6 font-serif text-[20px]"
           >
             <span className="transition-opacity duration-300 group-hover:opacity-80">
               +91 88906 67769
@@ -71,7 +71,7 @@ export default function Contact() {
             href="https://wa.me/918890667769"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-6 text-[18px]"
+            className="group inline-flex items-center gap-6 font-serif text-[18px]"
           >
             <span className="transition-opacity duration-300 group-hover:opacity-80">
               Chat on WhatsApp
