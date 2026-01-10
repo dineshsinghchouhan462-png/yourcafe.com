@@ -36,7 +36,7 @@ export default function Contact() {
               className="block text-[17px] leading-[1.8] hover:opacity-80 transition-opacity"
             >
               The Lazy Barn<br />
-              Ratanada, Jodhpur<br />
+           Sabji Mandi, opposite Ratanda, above Marwar Sweets, Prajapat Colony,<br />  Ratanada, Jodhpur, Rajasthan 342001    
               Rajasthan
             </a>
           </div>
