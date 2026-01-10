@@ -3,9 +3,10 @@ import IntroSection from "../components/sections/IntroSection";
 import About from "../components/sections/about";
 import Highlights from "../components/sections/highlights";
 import Gallery from "../components/sections/gallery";
-import Menu from "../components/sections/menu";   // ✅ ADD
+import Menu from "../components/sections/menu";
 import Delivery from "../components/sections/delivery";
 import Contact from "../components/sections/contact";
+import ContactMap from "../components/sections/ContactMap";
 
 export default function Home() {
   return (
@@ -15,9 +16,10 @@ export default function Home() {
       <About />
       <Highlights />
       <Gallery />
-      <Menu />        {/* ✅ ADD */}
+      <Menu />
       <Delivery />
       <Contact />
+      <ContactMap />
     </main>
   );
 }
