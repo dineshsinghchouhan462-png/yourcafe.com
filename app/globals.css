@@ -280,12 +280,33 @@ main {
 }
 
 /* =================================
-   FOOTER — TYPOGRAPHY LOCK (FINAL)
+   FOOTER — TERMINAL ZONE (FINAL)
 ================================= */
 
 .footer {
   position: relative;
-  background: #f7f4ef;
+  background: linear-gradient(
+    to bottom,
+    #f7f4ef 0%,
+    #f2eee7 45%,
+    #ede8df 100%
+  );
+}
+
+/* Subtle grounding line */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0,0,0,0.08),
+    transparent
+  );
 }
 
 /* Ultra-soft grain overlay */
@@ -313,7 +334,8 @@ main {
   transform: translateY(0);
 }
 
-/* Labels */
+/* Typography lock */
+
 .footer-label {
   font-size: 11px;
   letter-spacing: 0.32em;
@@ -321,21 +343,18 @@ main {
   color: #8a8a8a;
 }
 
-/* Address / meta text */
 .footer-text {
   font-size: 15px;
   line-height: 1.75;
-  color: #3f3f3f;
+  color: #5a5a5a;
 }
 
-/* Primary action (phone) */
 .footer-action {
   font-size: 18px;
   font-weight: 400;
   color: #1f1f1f;
 }
 
-/* Secondary action (WhatsApp / socials) */
 .footer-secondary {
   font-size: 13px;
   letter-spacing: 0.24em;
