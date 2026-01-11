@@ -35,7 +35,7 @@ export default function Footer() {
       {/* GRAIN */}
       <div className="pointer-events-none absolute inset-0 footer-grain" />
 
-      <div className="relative max-w-[1100px] mx-auto px-6 pt-32 pb-28 space-y-28">
+      <div className="relative max-w-[1100px] mx-auto px-6 pt-24 pb-20 space-y-20">
 
         {/* BRAND */}
         <div className="text-center space-y-4">
