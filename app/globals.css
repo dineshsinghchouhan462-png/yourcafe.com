@@ -280,12 +280,65 @@ main {
 }
 
 /* =================================
-   FOOTER GRAIN — ULTRA SOFT
+   FOOTER — TYPOGRAPHY LOCK (FINAL)
 ================================= */
 
-.footer-grain {
+.footer {
+  position: relative;
+  background: #f7f4ef;
+}
+
+/* Ultra-soft grain overlay */
+.footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-image: url("/images/grain.png");
   background-repeat: repeat;
-  opacity: 0.025; /* 2.5% — luxury safe */
-  mix-blend-mode: multiply;
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+/* Micro fade-in */
+.footer-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease;
+}
+
+.footer-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Labels */
+.footer-label {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+/* Address / meta text */
+.footer-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #3f3f3f;
+}
+
+/* Primary action (phone) */
+.footer-action {
+  font-size: 18px;
+  font-weight: 400;
+  color: #1f1f1f;
+}
+
+/* Secondary action (WhatsApp / socials) */
+.footer-secondary {
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #6a6a6a;
 }
