@@ -278,3 +278,14 @@ main {
     margin-top: -88px;
   }
 }
+
+/* =================================
+   FOOTER GRAIN — ULTRA SOFT
+================================= */
+
+.footer-grain {
+  background-image: url("/images/grain.png");
+  background-repeat: repeat;
+  opacity: 0.025; /* 2.5% — luxury safe */
+  mix-blend-mode: multiply;
+}
