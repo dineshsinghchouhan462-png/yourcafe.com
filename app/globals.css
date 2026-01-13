@@ -209,13 +209,22 @@ main {
 
 /* Desktop hover only */
 @media (hover: hover) and (pointer: fine) {
-  .menu-image-wrap:hover .menu-image {
-    transform: scale(1);
-  }
-
   .menu-image-wrap:hover {
     transform: translateY(-6px) scale(1.02);
   }
+
+  .menu-image-wrap:hover .menu-image {
+    transform: scale(1);
+  }
+}
+
+/* Mobile tap feedback — SAFE */
+.menu-image-wrap:active {
+  transform: scale(0.985);
+}
+
+.menu-image-wrap:active .menu-image {
+  transform: scale(1.02);
 }
 
 /* TEXT */
