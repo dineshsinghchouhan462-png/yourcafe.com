@@ -3,57 +3,42 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function CustomerCount() {
-  const ref = useRef<HTMLDivElement | null>(null);
   const [count, setCount] = useState(0);
-  const [hasRun, setHasRun] = useState(false);
+  const hasRun = useRef(false);
 
   useEffect(() => {
-    if (!ref.current || hasRun) return;
+    if (hasRun.current) return;
+    hasRun.current = true;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasRun(true);
-          observer.disconnect();
+    const target = 25000;
+    const duration = 1800; // ms — calm, premium
+    const startTime = performance.now();
 
-          const duration = 2400; // ms (luxury slow)
-          const target = 25000;
-          const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+      setCount(Math.floor(eased * target));
 
-          const animate = (time: number) => {
-            const progress = Math.min((time - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3); // ease-out
-            setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
 
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            }
-          };
-
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.4 }
-    );
-
-    observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, [hasRun]);
+    requestAnimationFrame(tick);
+  }, []);
 
   return (
-    <section
-      ref={ref}
-      className="bg-[#f7f4ef] py-32 text-center"
-    >
-      <div className="space-y-6">
-        <div className="font-serif text-[56px] md:text-[72px] text-[#1f1f1f]">
-          {count.toLocaleString()}+
-        </div>
+    <section className="bg-[#f7f4ef]">
+      <div className="max-w-[900px] mx-auto px-6 py-32 text-center space-y-8">
 
-        <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
-          Moments served with care
+        {/* COUNT */}
+        <p className="font-serif text-[48px] md:text-[64px] leading-none text-[#1f1f1f]">
+          {count.toLocaleString()}+
         </p>
+
+        {/* LABEL */}
+        <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
+          Guests served in 2025
+        </p>
+
       </div>
     </section>
   );
