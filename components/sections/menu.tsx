@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 const menuItems = [
@@ -30,9 +31,36 @@ const menuItems = [
 ];
 
 export default function Menu() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const elements = sectionRef.current.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="menu-surface">
-      <div className="menu-container">
+      <div ref={sectionRef} className="menu-container">
+
         {/* INTRO */}
         <div className="menu-intro reveal">
           <p className="menu-eyebrow">Signature Selections</p>
@@ -42,7 +70,11 @@ export default function Menu() {
         {/* ITEMS */}
         <div className="menu-list">
           {menuItems.map((item, i) => (
-            <div key={i} className="menu-item reveal delay">
+            <div
+              key={i}
+              className="menu-item reveal"
+              style={{ transitionDelay: `${i * 120}ms` }}
+            >
               {/* IMAGE */}
               <div className="menu-image-wrap">
                 <img
@@ -61,12 +93,13 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* CTA — FIXED */}
-        <div className="menu-cta reveal">
+        {/* CTA */}
+        <div className="menu-cta reveal" style={{ transitionDelay: "200ms" }}>
           <Link href="/menu" className="menu-link">
             View full menu
           </Link>
         </div>
+
       </div>
     </section>
   );
