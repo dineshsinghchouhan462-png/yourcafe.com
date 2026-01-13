@@ -355,3 +355,19 @@ main {
   text-transform: uppercase;
   color: #6a6a6a;
 }
+/* =================================
+   MENU SCROLL REVEAL (SAFE)
+================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 900ms ease,
+    transform 900ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
