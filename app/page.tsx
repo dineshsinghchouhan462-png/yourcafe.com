@@ -1,5 +1,6 @@
 import Hero from "../components/sections/hero";
 import IntroSection from "../components/sections/IntroSection";
+import CustomerCount from "../components/sections/CustomerCount";
 import About from "../components/sections/about";
 import Highlights from "../components/sections/highlights";
 import Gallery from "../components/sections/gallery";
@@ -13,6 +14,7 @@ export default function Home() {
     <main>
       <Hero />
       <IntroSection />
+      <CustomerCount />
       <About />
       <Highlights />
       <Gallery />
