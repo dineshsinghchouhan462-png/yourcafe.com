@@ -125,7 +125,7 @@ main {
 }
 
 /* =================================
-   MENU SECTION — QUIET LUXURY (CALM)
+   MENU SECTION — QUIET LUXURY (FINAL)
 ================================= */
 
 .menu-surface {
@@ -188,28 +188,22 @@ main {
   }
 }
 
-/* IMAGE — CALM MOTION, NO TAP */
+/* IMAGE — FINAL, NO BOX, NO LAG */
 
 .menu-image-wrap {
   flex: 1;
   overflow: hidden;
   border-radius: 36px;
-  background: #efece6;
-  box-shadow: 0 42px 120px rgba(0, 0, 0, 0.28);
-  will-change: transform;
-  transition: transform 0.9s cubic-bezier(.16,1,.3,1);
-  touch-action: pan-y;
-  -webkit-tap-highlight-color: transparent;
+  background: transparent; /* critical fix */
+  box-shadow: 0 36px 96px rgba(0, 0, 0, 0.22);
+  transition: transform 1.1s cubic-bezier(.16,1,.3,1);
 }
 
 .menu-image {
   width: 100%;
-  transform: scale(1.05);
-  will-change: transform;
-  transition: transform 1.2s ease-out;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
+  display: block;
+  transform: scale(1.06);
+  transition: transform 1.4s cubic-bezier(.16,1,.3,1);
 }
 
 /* Desktop hover only */
@@ -223,10 +217,14 @@ main {
   }
 }
 
-/* Mobile passive motion only */
+/* Mobile — calm, no interaction artifacts */
 @media (hover: none) and (pointer: coarse) {
+  .menu-image-wrap {
+    box-shadow: 0 20px 48px rgba(0,0,0,0.18);
+  }
+
   .menu-image {
-    transform: scale(1.03);
+    transform: scale(1.04);
   }
 }
 
