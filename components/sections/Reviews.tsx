@@ -2,31 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const reviews = [
-  {
-    name: "Kartik Sharma",
-    rating: 5,
-    text:
-      "Very clean and nice place. Friendly and courteous staff. Loved the veg cheese sandwich and onion tomato pizza. Virgin Mojito was super refreshing.",
-  },
-  {
-    name: "Jitesh Ladwa",
-    rating: 5,
-    text:
-      "Amazing cafe with great vegan options. The owner personally helped us and even arranged vegan chocolate specially for us. Highly recommended.",
-  },
-  {
-    name: "Spandan Bandyopadhyaya",
-    rating: 5,
-    text:
-      "The Virgin Mojito was perfectly balanced and the Hakka noodles were surprisingly good. A calm, pleasant place to unwind.",
-  },
-];
+const TOTAL_REVIEWS = 250; // you can update later safely
 
 export default function Reviews() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const [count, setCount] = useState(0);
 
+  // Reveal + count only ONCE
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,65 +18,62 @@ export default function Reviews() {
           observer.disconnect();
         }
       },
-      { threshold: 0.35 }
+      { threshold: 0.5 }
     );
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
+  // Counter animation
+  useEffect(() => {
+    if (!visible) return;
+
+    let start = 0;
+    const duration = 1400;
+    const stepTime = 16;
+    const increment = TOTAL_REVIEWS / (duration / stepTime);
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= TOTAL_REVIEWS) {
+        setCount(TOTAL_REVIEWS);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [visible]);
+
   return (
-    <section className="bg-[#f7f4ef]">
+    <section className="reviews-surface">
       <div
         ref={ref}
-        className={`
-          mx-auto max-w-[1100px]
-          px-6 md:px-16
-          py-32 md:py-44
-          transition-all duration-[1200ms] ease-out
-          ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}
-        `}
+        className={`reviews-inner ${
+          visible ? "is-visible" : ""
+        }`}
       >
-        {/* Header */}
-        <div className="text-center mb-24">
-          <p className="text-[11px] tracking-[0.32em] uppercase text-[#8a8a8a] mb-4">
-            Guest Voices
-          </p>
+        <p className="reviews-eyebrow">Trusted by our guests</p>
 
-          <h2 className="font-serif text-[36px] md:text-[48px] leading-tight text-[#1f1f1f]">
-            Loved by those who slow down
-          </h2>
-
-          <p className="mt-6 text-[14px] text-[#6a6a6a] tracking-wide">
-            ★ 4.8 average rating · Based on Google reviews
-          </p>
+        <div className="reviews-count">
+          {count}+ reviews
         </div>
 
-        {/* Reviews */}
-        <div className="grid gap-16 md:grid-cols-3">
-          {reviews.map((review, i) => (
-            <div
-              key={i}
-              className={`
-                transition-all duration-[900ms] ease-out
-                ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
-              `}
-              style={{ transitionDelay: `${i * 120}ms` }}
-            >
-              <div className="text-[#c9a25d] text-sm mb-4">
-                {"★".repeat(review.rating)}
-              </div>
+        <p className="reviews-text">
+          Consistently praised for warmth, food, and atmosphere —
+          by locals and travellers alike.
+        </p>
 
-              <p className="text-[15px] leading-[1.9] text-[#3f3f3f] mb-6">
-                “{review.text}”
-              </p>
-
-              <p className="text-[12px] tracking-[0.18em] uppercase text-[#7a7a7a]">
-                {review.name}
-              </p>
-            </div>
-          ))}
-        </div>
+        <a
+          href="https://www.google.com/search?q=the+lazy+barn+jodhpur+reviews"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="reviews-link"
+        >
+          Read more on Google
+        </a>
       </div>
     </section>
   );
