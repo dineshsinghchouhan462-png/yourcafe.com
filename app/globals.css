@@ -367,21 +367,29 @@ main {
   opacity: 1;
   transform: translateY(0);
 }
-
 /* =================================
-   REVIEWS — ULTRA PREMIUM (FINAL)
+   REVIEWS — ULTRA PREMIUM (POLISHED)
 ================================= */
 
 .reviews-surface {
-  background: radial-gradient(
-    ellipse at center,
-    #1a1815 0%,
-    #0f0e0c 70%
-  );
+  background: #0f0e0c;
   color: #f4efe9;
+  position: relative;
+}
+
+/* subtle grain for material depth */
+.reviews-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/grain.png");
+  background-repeat: repeat;
+  opacity: 0.035;
+  pointer-events: none;
 }
 
 .reviews-inner {
+  position: relative;
   max-width: 820px;
   margin: 0 auto;
   padding: 180px 24px;
@@ -398,19 +406,21 @@ main {
   transform: translateY(0);
 }
 
+/* Eyebrow */
 .reviews-eyebrow {
   font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: rgba(244,239,233,0.55);
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
+/* Count */
 .reviews-count {
-  font-family: ui-serif, Georgia, Cambria, serif;
-  font-size: 64px;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 56px;
   line-height: 1;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 @media (min-width: 768px) {
@@ -419,45 +429,62 @@ main {
   }
 }
 
+/* Stars — editorial seal */
 .reviews-stars {
+  font-size: 13px;
   letter-spacing: 6px;
-  font-size: 14px;
   color: #e6c98a;
-  margin-bottom: 42px;
+  margin-bottom: 48px;
 }
 
-.review-card {
-  max-width: 620px;
-  margin: 0 auto 56px;
-  animation: reviewFade 4200ms ease-in-out infinite;
+/* Review quote wrapper */
+.review-quote {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  padding-top: 32px;
 }
 
-@keyframes reviewFade {
-  0% { opacity: 0; transform: translateY(6px); }
-  15% { opacity: 1; transform: translateY(0); }
-  85% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-6px); }
+/* Oversized quotation mark (optical luxury) */
+.review-quote::before {
+  content: "“";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: ui-serif, Georgia, Cambria, serif;
+  font-size: 120px;
+  line-height: 1;
+  color: rgba(244,239,233,0.05);
+  pointer-events: none;
 }
 
+/* Quote text */
 .review-text {
   font-size: 17px;
-  line-height: 1.85;
+  line-height: 1.95;
   color: rgba(244,239,233,0.85);
-  margin-bottom: 18px;
 }
 
+/* Reviewer credit */
 .review-name {
-  font-size: 12px;
-  letter-spacing: 0.28em;
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: rgba(244,239,233,0.55);
+  color: rgba(244,239,233,0.45);
 }
 
+/* Google link — inviting, not pushy */
 .reviews-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 72px;
   font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(244,239,233,0.85);
+  color: rgba(244,239,233,0.9);
   position: relative;
   padding-bottom: 6px;
 }
@@ -476,4 +503,12 @@ main {
 
 .reviews-link:hover::after {
   width: 60%;
+}
+
+/* Optional subtle Google star icon */
+.reviews-link::before {
+  content: "★";
+  font-size: 10px;
+  color: #e6c98a;
+  opacity: 0.85;
 }
