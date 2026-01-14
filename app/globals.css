@@ -33,7 +33,6 @@ body {
     inset 0 -1px rgba(255,255,255,0.04);
 }
 
-/* Kill grey veil completely */
 .header-top {
   background: transparent;
 }
@@ -42,7 +41,6 @@ body {
   display: none;
 }
 
-/* Scroll state — deeper, richer */
 .header-scrolled {
   background: rgba(8, 7, 6, 0.95);
   box-shadow:
@@ -50,7 +48,6 @@ body {
     inset 0 -1px rgba(255,255,255,0.035);
 }
 
-/* Layout */
 .header-inner {
   height: 104px;
   padding: 0 28px;
@@ -67,7 +64,6 @@ body {
   padding: 0 24px;
 }
 
-/* LOGO — authority restored */
 .logo-mark {
   height: 48px;
   width: auto;
@@ -84,7 +80,6 @@ body {
   height: 36px;
 }
 
-/* Menu text — editorial, international */
 .header-menu-text {
   font-size: 12px;
   letter-spacing: 0.34em;
@@ -135,7 +130,6 @@ main {
 /* =================================
    MENU SECTION — QUIET LUXURY (FINAL)
 ================================= */
-/* ⬇⬇⬇ EVERYTHING BELOW IS UNCHANGED ⬇⬇⬇ */
 
 .menu-surface {
   background: #f7f4ef;
@@ -197,8 +191,6 @@ main {
   }
 }
 
-/* IMAGE — FINAL, NO BOX, NO LAG */
-
 .menu-image-wrap {
   flex: 1;
   overflow: hidden;
@@ -235,8 +227,6 @@ main {
   }
 }
 
-/* TEXT */
-
 .menu-item-title {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 30px;
@@ -269,8 +259,6 @@ main {
   line-height: 1.9;
   color: #4a4a4a;
 }
-
-/* CTA */
 
 .menu-cta {
   margin-top: 260px;
@@ -379,12 +367,17 @@ main {
   opacity: 1;
   transform: translateY(0);
 }
+
 /* =================================
-   REVIEWS — ULTRA PREMIUM
+   REVIEWS — ULTRA PREMIUM (FINAL)
 ================================= */
 
 .reviews-surface {
-  background: #0f0e0c;
+  background: radial-gradient(
+    ellipse at center,
+    #1a1815 0%,
+    #0f0e0c 70%
+  );
   color: #f4efe9;
 }
 
@@ -410,14 +403,14 @@ main {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: rgba(244,239,233,0.55);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .reviews-count {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: 56px;
+  font-family: ui-serif, Georgia, Cambria, serif;
+  font-size: 64px;
   line-height: 1;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 @media (min-width: 768px) {
@@ -426,19 +419,45 @@ main {
   }
 }
 
-.reviews-text {
-  font-size: 16px;
-  line-height: 1.9;
-  color: rgba(244,239,233,0.75);
-  max-width: 560px;
-  margin: 0 auto 40px;
+.reviews-stars {
+  letter-spacing: 6px;
+  font-size: 14px;
+  color: #e6c98a;
+  margin-bottom: 42px;
+}
+
+.review-card {
+  max-width: 620px;
+  margin: 0 auto 56px;
+  animation: reviewFade 4200ms ease-in-out infinite;
+}
+
+@keyframes reviewFade {
+  0% { opacity: 0; transform: translateY(6px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+
+.review-text {
+  font-size: 17px;
+  line-height: 1.85;
+  color: rgba(244,239,233,0.85);
+  margin-bottom: 18px;
+}
+
+.review-name {
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(244,239,233,0.55);
 }
 
 .reviews-link {
   font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(244,239,233,0.9);
+  color: rgba(244,239,233,0.85);
   position: relative;
   padding-bottom: 6px;
 }
