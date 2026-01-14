@@ -6,9 +6,7 @@
    GLOBAL BASE
 ================================= */
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: transparent;
@@ -33,13 +31,9 @@ body {
     inset 0 -1px rgba(255,255,255,0.04);
 }
 
-.header-top {
-  background: transparent;
-}
+.header-top { background: transparent; }
 
-.header-top::before {
-  display: none;
-}
+.header-top::before { display: none; }
 
 .header-scrolled {
   background: rgba(8, 7, 6, 0.95);
@@ -76,9 +70,7 @@ body {
     drop-shadow(0 0 22px rgba(255,190,120,0.45));
 }
 
-.header-scrolled .logo-mark {
-  height: 36px;
-}
+.header-scrolled .logo-mark { height: 36px; }
 
 .header-menu-text {
   font-size: 12px;
@@ -88,31 +80,23 @@ body {
   transition: opacity 0.35s ease;
 }
 
-.header-menu-text:hover {
-  opacity: 0.7;
-}
+.header-menu-text:hover { opacity: 0.7; }
 
 /* =================================
    LAYOUT OFFSET
 ================================= */
 
-main {
-  padding-top: 96px;
-}
+main { padding-top: 96px; }
 
 @media (max-width: 768px) {
-  main {
-    padding-top: 88px;
-  }
+  main { padding-top: 88px; }
 }
 
 /* =================================
    INTRO SURFACE
 ================================= */
 
-.intro-surface {
-  background-color: #f7f4ef;
-}
+.intro-surface { background-color: #f7f4ef; }
 
 .intro-text {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -128,114 +112,10 @@ main {
 }
 
 /* =================================
-   PHILOSOPHY — PREMIUM REFINEMENT (UPGRADED)
-================================= */
-
-.philosophy-surface {
-  background: #f7f4ef;
-}
-
-.philosophy-inner {
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 1400ms ease,
-    transform 1400ms ease;
-}
-
-.philosophy-inner.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.philosophy-image-wrap {
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-  pointer-events: none;
-}
-
-.philosophy-image {
-  display: block;
-  width: 100%;
-  transform: scale(1.03);
-  transition: transform 1800ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .philosophy-image-wrap:hover .philosophy-image {
-    transform: scale(1.01);
-  }
-}
-
-@media (hover: none) and (pointer: coarse) {
-  .philosophy-image {
-    transform: scale(1.02);
-  }
-}
-
-/* =================================
-   CUSTOMER COUNT — MONUMENTAL (UPGRADED)
-================================= */
-
-.count-surface {
-  background: #f7f4ef;
-  text-align: center;
-}
-
-.count-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 160px 24px;
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 1600ms ease,
-    transform 1600ms ease;
-}
-
-.count-inner.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.count-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: #7a7a7a;
-  margin-bottom: 28px;
-}
-
-.count-number {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: 72px;
-  line-height: 1;
-  color: #1f1f1f;
-  margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-  .count-number {
-    font-size: 96px;
-  }
-}
-
-.count-caption {
-  font-size: 16px;
-  line-height: 1.9;
-  color: #5a5a5a;
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-/* =================================
    MENU SECTION — QUIET LUXURY (FINAL)
 ================================= */
 
-.menu-surface {
-  background: #f7f4ef;
-}
+.menu-surface { background: #f7f4ef; }
 
 .menu-container {
   max-width: 1100px;
@@ -244,9 +124,7 @@ main {
 }
 
 @media (min-width: 768px) {
-  .menu-container {
-    padding: 420px 64px;
-  }
+  .menu-container { padding: 420px 64px; }
 }
 
 .menu-intro {
@@ -269,9 +147,7 @@ main {
 }
 
 @media (min-width: 768px) {
-  .menu-title {
-    font-size: 56px;
-  }
+  .menu-title { font-size: 56px; }
 }
 
 .menu-list {
@@ -324,13 +200,266 @@ main {
     box-shadow: 0 20px 48px rgba(0,0,0,0.18);
   }
 
-  .menu-image {
-    transform: scale(1.04);
-  }
+  .menu-image { transform: scale(1.04); }
+}
+
+.menu-item-title {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 30px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .menu-item-title { font-size: 36px; }
+}
+
+.menu-item-title::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 1px;
+  background: rgba(31, 31, 31, 0.6);
+  margin-top: 10px;
+  transition: width 0.6s ease;
+}
+
+.menu-item:hover .menu-item-title::after { width: 42px; }
+
+.menu-item-desc {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #4a4a4a;
+}
+
+.menu-cta {
+  margin-top: 260px;
+  text-align: center;
+}
+
+.menu-link {
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  transition: opacity 0.4s ease;
+}
+
+.menu-link:hover { opacity: 0.7; }
+
+/* =================================
+   MOBILE HERO FIX
+================================= */
+
+@media (max-width: 768px) {
+  main > section:first-child { margin-top: -88px; }
 }
 
 /* =================================
-   FOOTER + REVIEWS + REVEALS
-   (UNCHANGED — KEPT AS IS)
+   FOOTER — TERMINAL ZONE (FINAL)
 ================================= */
-/* — your existing footer, reviews, reveal code remains untouched — */
+
+.footer {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    #f7f4ef 0%,
+    #f2eee7 45%,
+    #ede8df 100%
+  );
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0,0,0,0.08),
+    transparent
+  );
+}
+
+.footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/grain.png");
+  background-repeat: repeat;
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+.footer-label {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.footer-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #5a5a5a;
+}
+
+.footer-action {
+  font-size: 18px;
+  font-weight: 400;
+  color: #1f1f1f;
+}
+
+.footer-secondary {
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #6a6a6a;
+}
+
+/* =================================
+   MENU SCROLL REVEAL (SAFE)
+================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =================================
+   REVIEWS — ULTRA PREMIUM (POLISHED)
+================================= */
+
+.reviews-surface {
+  background: #0f0e0c;
+  color: #f4efe9;
+  position: relative;
+}
+
+.reviews-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/grain.png");
+  background-repeat: repeat;
+  opacity: 0.035;
+  pointer-events: none;
+}
+
+.reviews-inner {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 180px 24px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reviews-inner.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reviews-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(244,239,233,0.55);
+  margin-bottom: 22px;
+}
+
+.reviews-count {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 768px) {
+  .reviews-count { font-size: 72px; }
+}
+
+.reviews-stars {
+  font-size: 13px;
+  letter-spacing: 6px;
+  color: #e6c98a;
+  margin-bottom: 48px;
+}
+
+.review-quote {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  padding-top: 32px;
+}
+
+.review-quote::before {
+  content: "“";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: ui-serif, Georgia, Cambria, serif;
+  font-size: 120px;
+  line-height: 1;
+  color: rgba(244,239,233,0.05);
+  pointer-events: none;
+}
+
+.review-text {
+  font-size: 17px;
+  line-height: 1.95;
+  color: rgba(244,239,233,0.85);
+}
+
+.review-name {
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(244,239,233,0.45);
+}
+
+.reviews-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 72px;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(244,239,233,0.9);
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.reviews-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(244,239,233,0.5);
+  transform: translateX(-50%);
+  transition: width 0.5s ease;
+}
+
+.reviews-link:hover::after { width: 60%; }
+
+.reviews-link::before {
+  content: "★";
+  font-size: 10px;
+  color: #e6c98a;
+  opacity: 0.85;
+}
