@@ -2,7 +2,7 @@
 
 export default function Contact() {
   return (
-    <section className="bg-[#f7f4ef] text-[#1f1f1f]">
+    <section id="visit" className="bg-[#f7f4ef] text-[#1f1f1f]">
       <div className="max-w-[900px] mx-auto px-6 pt-40 pb-40 space-y-24">
 
         {/* ADDRESS */}
