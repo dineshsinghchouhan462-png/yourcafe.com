@@ -29,7 +29,11 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#f7f4ef] overflow-hidden">
+    <section
+      id="gallery"
+      ref={sectionRef}
+      className="bg-[#f7f4ef] overflow-hidden"
+    >
       <div className="mx-auto max-w-[1300px] px-6 md:px-16 py-36 md:py-48">
 
         {/* Section Intro */}
@@ -63,9 +67,7 @@ export default function Gallery() {
                   ${isActive ? "z-10" : ""}
                 `}
                 style={{ transitionDelay: `${i * 180}ms` }}
-                onClick={() =>
-                  setActiveIndex(isActive ? null : i)
-                }
+                onClick={() => setActiveIndex(isActive ? null : i)}
               >
                 <img
                   src={src}
@@ -77,7 +79,6 @@ export default function Gallery() {
                   `}
                 />
 
-                {/* Soft material overlay */}
                 <div
                   className={`
                     absolute inset-0
