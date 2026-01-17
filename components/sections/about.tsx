@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 export default function About() {
   const imageRef = useRef<HTMLDivElement>(null);
 
-  // Subtle scroll-based parallax (unchanged logic, optimized)
+  // Subtle scroll-based parallax (unchanged logic)
   useEffect(() => {
     const handleScroll = () => {
       if (!imageRef.current) return;
@@ -25,7 +25,7 @@ export default function About() {
   }, []);
 
   return (
-    <section className="bg-[#f7f4ef]">
+    <section id="about" className="bg-[#f7f4ef]">
       <div
         className="
           mx-auto max-w-[1200px]
@@ -56,7 +56,6 @@ export default function About() {
             "
           />
 
-          {/* Ultra-soft material overlay (no interaction, no click) */}
           <div
             className="
               pointer-events-none
