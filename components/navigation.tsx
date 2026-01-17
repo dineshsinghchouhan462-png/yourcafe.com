@@ -2,6 +2,14 @@
 
 import { useState, useEffect } from "react";
 
+const links = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Menu", href: "#menu" },
+  { label: "Visit", href: "#visit" },
+];
+
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -18,31 +26,27 @@ export default function Navigation() {
     <>
       {/* HEADER */}
       <header
-        className={`fixed top-0 left-0 w-full z-40 pointer-events-none transition-all duration-[900ms] ease-out ${
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-[900ms] ease-out ${
           scrolled ? "header-scrolled" : "header-top"
         }`}
       >
-        <div className="header-inner flex items-center justify-between px-6 md:px-16 pointer-events-auto">
+        <div className="header-inner flex items-center justify-between px-6 md:px-16">
 
-          {/* LOGO — PURE, NO CONTAINER */}
-          <img
-            src="/logo/lb-mark.png"
-            alt="The Lazy Barn"
-            className={`logo-mark transition-all duration-[900ms] ease-out ${
-              scrolled
-                ? "opacity-90 scale-[0.92]"
-                : "opacity-95 scale-100"
-            }`}
-          />
+          {/* LOGO */}
+          <a href="#home">
+            <img
+              src="/logo/lb-mark.png"
+              alt="The Lazy Barn"
+              className={`logo-mark transition-all duration-[900ms] ease-out ${
+                scrolled ? "opacity-90 scale-[0.92]" : "opacity-95 scale-100"
+              }`}
+            />
+          </a>
 
-          {/* MENU */}
+          {/* MENU BUTTON */}
           <button
             onClick={() => setOpen(true)}
-            className={`menu-text transition-all duration-[800ms] ease-out ${
-              scrolled
-                ? "menu-scrolled"
-                : "menu-top"
-            }`}
+            className="header-menu-text"
           >
             MENU
           </button>
@@ -52,22 +56,21 @@ export default function Navigation() {
       {/* FULLSCREEN MENU OVERLAY */}
       <div
         className={`fixed inset-0 z-50 bg-[#0f0f0f]/95 backdrop-blur-[2px] transition-opacity duration-500 ${
-          open
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex h-full items-center justify-center px-6">
           <nav className="text-center">
             <ul className="space-y-8">
-              {["Home", "About", "Gallery", "Menu", "Visit"].map((item) => (
-                <li key={item}>
-                  <button
+              {links.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
                     onClick={() => setOpen(false)}
-                    className="font-serif text-[32px] md:text-[48px] tracking-[0.04em] text-[#F4EFE9]/90 hover:text-[#F4EFE9] transition-opacity duration-300"
+                    className="block font-serif text-[32px] md:text-[48px] tracking-[0.04em] text-[#F4EFE9]/90 hover:text-[#F4EFE9] transition-opacity duration-300"
                   >
-                    {item}
-                  </button>
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
