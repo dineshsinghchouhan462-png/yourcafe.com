@@ -47,9 +47,7 @@ export default function Menu() {
           }
         });
       },
-      {
-        threshold: 0.25,
-      }
+      { threshold: 0.25 }
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -58,7 +56,7 @@ export default function Menu() {
   }, []);
 
   return (
-    <section className="menu-surface">
+    <section id="menu" className="menu-surface">
       <div ref={sectionRef} className="menu-container">
 
         {/* INTRO */}
