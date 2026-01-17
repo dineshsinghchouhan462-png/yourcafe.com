@@ -480,3 +480,25 @@ main { padding-top: 96px; }
   color: #e6c98a;
   opacity: 0.85;
 }
+/* =================================
+   FORCE MENU INTERACTION (FIX)
+================================= */
+
+nav,
+nav * {
+  pointer-events: auto !important;
+}
+
+a {
+  pointer-events: auto !important;
+}
+/* =================================
+   DISABLE INVISIBLE CLICK BLOCKERS
+================================= */
+
+.header::before,
+.header::after,
+.header-top::before,
+.header-top::after {
+  pointer-events: none !important;
+}
