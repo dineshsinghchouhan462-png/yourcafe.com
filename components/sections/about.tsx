@@ -1,70 +1,78 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 export default function About() {
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  // Subtle scroll-based parallax (unchanged logic)
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!imageRef.current) return;
-
-      const rect = imageRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        const progress = 1 - rect.top / windowHeight;
-        const translateY = Math.min(Math.max(progress * 16, -8), 16);
-        imageRef.current.style.transform = `translateY(${translateY}px)`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <section id="about" className="bg-[#f7f4ef]">
+    <section
+      id="about"
+      className="relative w-full overflow-hidden"
+    >
+      {/* Background Image */}
+      <img
+        src="/images/philosophy.jpg"
+        alt="The Lazy Barn interior"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Warm luxury overlay */}
+      <div className="absolute inset-0 bg-[#9c5a3c]/70" />
+
+      {/* Content */}
       <div
         className="
-          mx-auto max-w-[1200px]
+          relative z-10
+          max-w-[1200px]
+          mx-auto
           px-6 md:px-16
-          pt-6 md:pt-10
-          pb-32 md:pb-40
+          py-32 md:py-44
+          text-[#f7f4ef]
         "
       >
-        <div
-          ref={imageRef}
+        {/* Small label */}
+        <p className="text-[12px] tracking-[0.32em] uppercase opacity-80 mb-6">
+          The Experience
+        </p>
+
+        {/* Main philosophy */}
+        <h2
           className="
-            relative
-            overflow-hidden
-            rounded-[28px]
-            will-change-transform
-            transition-transform duration-[1200ms] ease-out
+            font-serif
+            text-[42px] md:text-[64px]
+            leading-[1.05]
+            max-w-[640px]
+            mb-8
           "
         >
-          <img
-            src="/images/philosophy.jpg"
-            alt="The Lazy Barn interior"
-            className="
-              w-full
-              h-auto
-              transition-transform duration-[1200ms] ease-out
-              md:hover:scale-[1.03]
-              active:scale-[1.01]
-            "
-          />
+          A slower way<br />
+          to spend time
+        </h2>
 
-          <div
-            className="
-              pointer-events-none
-              absolute inset-0
-              bg-black/0
-              md:hover:bg-black/5
-              transition-colors duration-700
-            "
-          />
+        {/* Supporting text */}
+        <p
+          className="
+            text-[16px] md:text-[18px]
+            leading-[1.9]
+            max-w-[520px]
+            opacity-90
+          "
+        >
+          A place shaped by slow mornings, familiar conversations,
+          and time left unhurried.
+        </p>
+
+        {/* Bottom meta row */}
+        <div
+          className="
+            mt-24
+            flex items-center justify-between
+            max-w-[520px]
+            text-[12px]
+            tracking-[0.28em]
+            uppercase
+            opacity-85
+          "
+        >
+          <span>We are open</span>
+          <span>8am – 9pm</span>
         </div>
       </div>
     </section>
