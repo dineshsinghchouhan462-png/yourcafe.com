@@ -11,12 +11,12 @@ export default function CustomerCount() {
     hasRun.current = true;
 
     const target = 25000;
-    const duration = 1800; // ms — calm, premium
+    const duration = 2600; // slower = more confidence
     const startTime = performance.now();
 
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+      const eased = 1 - Math.pow(1 - progress, 4); // very soft ease-out
       setCount(Math.floor(eased * target));
 
       if (progress < 1) requestAnimationFrame(tick);
@@ -26,16 +26,21 @@ export default function CustomerCount() {
   }, []);
 
   return (
-    <section className="bg-[#f7f4ef]">
-      <div className="max-w-[900px] mx-auto px-6 py-32 text-center space-y-8">
+    <section className="surface-light">
+      <div className="max-w-[760px] mx-auto px-6 py-40 text-center">
+
+        {/* EYEBROW */}
+        <p className="text-[11px] tracking-[0.36em] uppercase text-gray-500 mb-10">
+          A quiet measure of trust
+        </p>
 
         {/* COUNT */}
-        <p className="font-serif text-[48px] md:text-[64px] leading-none text-[#1f1f1f]">
+        <p className="font-serif text-[52px] md:text-[72px] leading-none text-[#1f1f1f] mb-6">
           {count.toLocaleString()}+
         </p>
 
         {/* LABEL */}
-        <p className="text-[12px] tracking-[0.32em] uppercase text-gray-500">
+        <p className="text-[12px] tracking-[0.32em] uppercase text-gray-400">
           Guests served in 2025
         </p>
 
