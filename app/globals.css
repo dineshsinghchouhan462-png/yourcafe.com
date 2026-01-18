@@ -535,3 +535,38 @@ a {
     rgba(247,244,239,1) 100%
   );
      }
+/* =================================
+   CINEMATIC SECTION DISSOLVE (GLOBAL)
+================================= */
+
+.section-dissolve {
+  position: relative;
+  height: 140px;
+  margin-top: -140px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-dissolve::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(247,244,239,0),
+    rgba(232,220,205,0.55),
+    rgba(200,155,123,0.35),
+    rgba(15,14,12,0.85)
+  );
+}
+
+/* Reverse dissolve (dark → light) */
+.section-dissolve.reverse::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(15,14,12,0),
+    rgba(200,155,123,0.35),
+    rgba(232,220,205,0.55),
+    rgba(247,244,239,1)
+  );
+}
