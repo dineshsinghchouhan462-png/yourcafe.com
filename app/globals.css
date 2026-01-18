@@ -502,39 +502,7 @@ a {
 .header-top::after {
   pointer-events: none !important;
 }
-/* =================================
-   SECTION TRANSITION SOFTENING
-================================= */
 
-/* Light → Light */
-.section-fade-light {
-  height: 120px;
-  background: linear-gradient(
-    to bottom,
-    rgba(247,244,239,0) 0%,
-    rgba(247,244,239,1) 100%
-  );
-}
-
-/* Light → Dark */
-.section-fade-to-dark {
-  height: 140px;
-  background: linear-gradient(
-    to bottom,
-    rgba(247,244,239,1) 0%,
-    rgba(15,14,12,1) 100%
-  );
-}
-
-/* Dark → Light */
-.section-fade-to-light {
-  height: 140px;
-  background: linear-gradient(
-    to bottom,
-    rgba(15,14,12,1) 0%,
-    rgba(247,244,239,1) 100%
-  );
-     }
 /* =================================
    CINEMATIC SECTION DISSOLVE (GLOBAL)
 ================================= */
