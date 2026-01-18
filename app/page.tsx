@@ -1,5 +1,4 @@
 import Hero from "../components/sections/hero";
-import IntroSection from "../components/sections/IntroSection";
 import CustomerCount from "../components/sections/CustomerCount";
 import About from "../components/sections/about";
 import Reviews from "../components/sections/Reviews";
@@ -14,30 +13,32 @@ export default function Home() {
   return (
     <main>
 
+      {/* HERO */}
       <Hero />
 
-      {/* Hero → Count */}
+      {/* Hero → Count (soft light → light dissolve) */}
       <div className="section-dissolve reverse" />
 
-      <IntroSection />
-
+      {/* CUSTOMER COUNT */}
       <CustomerCount />
 
-      {/* Count → Philosophy */}
+      {/* Count → Philosophy (light → warm cinematic) */}
       <div className="section-dissolve" />
 
+      {/* PHILOSOPHY (IMAGE-BASED) */}
       <About />
 
-      {/* Philosophy → Reviews */}
+      {/* Philosophy → Reviews (warm → dark cinematic) */}
       <div className="section-dissolve" />
 
+      {/* REVIEWS */}
       <Reviews />
 
-      {/* Reviews → Highlights */}
+      {/* Reviews → Highlights (dark → light) */}
       <div className="section-dissolve reverse" />
 
+      {/* REST OF PAGE */}
       <Highlights />
-
       <Gallery />
       <Menu />
       <Delivery />
