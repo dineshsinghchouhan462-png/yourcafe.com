@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const menuItems = [
   {
@@ -32,6 +32,7 @@ const menuItems = [
 
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -51,7 +52,6 @@ export default function Menu() {
     );
 
     elements.forEach((el) => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
 
@@ -73,7 +73,6 @@ export default function Menu() {
               className="menu-item reveal"
               style={{ transitionDelay: `${i * 120}ms` }}
             >
-              {/* IMAGE */}
               <div className="menu-image-wrap">
                 <img
                   src={item.image}
@@ -82,7 +81,6 @@ export default function Menu() {
                 />
               </div>
 
-              {/* TEXT */}
               <div className="menu-text">
                 <h3 className="menu-item-title">{item.title}</h3>
                 <p className="menu-item-desc">{item.description}</p>
@@ -91,14 +89,14 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* CTA — FIXED */}
-        <div
-          className="menu-cta reveal relative z-[10]"
-          style={{ transitionDelay: "200ms", pointerEvents: "auto" }}
-        >
-          <Link href="/menu" className="menu-link">
+        {/* CTA — FORCE ROUTE */}
+        <div className="menu-cta reveal" style={{ transitionDelay: "200ms" }}>
+          <button
+            onClick={() => router.push("/menu")}
+            className="menu-link"
+          >
             View full menu
-          </Link>
+          </button>
         </div>
 
       </div>
