@@ -1,18 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
-  { label: "Home", id: "home" },
-  { label: "About", id: "about" },
-  { label: "Gallery", id: "gallery" },
-  { label: "Menu", id: "menu" },
-  { label: "Visit", id: "visit" },
+  { label: "Home", type: "route", href: "/" },
+  { label: "About", type: "scroll", id: "about" },
+  { label: "Gallery", type: "scroll", id: "gallery" },
+  { label: "Menu", type: "route", href: "/menu" },
+  { label: "Visit", type: "scroll", id: "contact" },
 ];
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,6 +26,8 @@ export default function Navigation() {
   }, []);
 
   const handleScroll = (id: string) => {
+    if (pathname !== "/") return; // ⛔ prevent hijack on other pages
+
     const el = document.getElementById(id);
     if (!el) return;
 
@@ -30,7 +35,7 @@ export default function Navigation() {
 
     setTimeout(() => {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 150);
+    }, 120);
   };
 
   return (
@@ -42,11 +47,13 @@ export default function Navigation() {
         }`}
       >
         <div className="header-inner flex items-center justify-between px-6 md:px-16 pointer-events-auto">
-          <img
-            src="/logo/lb-mark.png"
-            alt="The Lazy Barn"
-            className="logo-mark"
-          />
+          <Link href="/">
+            <img
+              src="/logo/lb-mark.png"
+              alt="The Lazy Barn"
+              className="logo-mark"
+            />
+          </Link>
 
           <button
             onClick={() => setOpen(true)}
@@ -67,13 +74,23 @@ export default function Navigation() {
           <nav className="text-center">
             <ul className="space-y-8">
               {links.map((item) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => handleScroll(item.id)}
-                    className="font-serif text-[32px] md:text-[48px] tracking-[0.04em] text-[#F4EFE9]/90 hover:text-[#F4EFE9]"
-                  >
-                    {item.label}
-                  </button>
+                <li key={item.label}>
+                  {item.type === "route" ? (
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="font-serif text-[32px] md:text-[48px] tracking-[0.04em] text-[#F4EFE9]/90 hover:text-[#F4EFE9]"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => handleScroll(item.id)}
+                      className="font-serif text-[32px] md:text-[48px] tracking-[0.04em] text-[#F4EFE9]/90 hover:text-[#F4EFE9]"
+                    >
+                      {item.label}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
