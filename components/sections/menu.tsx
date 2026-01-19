@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const menuItems = [
   {
@@ -32,6 +32,7 @@ const menuItems = [
 
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -51,22 +52,18 @@ export default function Menu() {
     );
 
     elements.forEach((el) => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
 
   return (
-    {/* 🔴 IMPORTANT: ID CHANGED FROM "menu" → "home-menu" */}
     <section id="home-menu" className="menu-surface">
       <div ref={sectionRef} className="menu-container">
 
-        {/* INTRO */}
         <div className="menu-intro reveal">
           <p className="menu-eyebrow">Signature Selections</p>
           <h2 className="menu-title">Crafted with intention</h2>
         </div>
 
-        {/* ITEMS */}
         <div className="menu-list">
           {menuItems.map((item, i) => (
             <div
@@ -74,16 +71,10 @@ export default function Menu() {
               className="menu-item reveal"
               style={{ transitionDelay: `${i * 120}ms` }}
             >
-              {/* IMAGE */}
               <div className="menu-image-wrap">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="menu-image"
-                />
+                <img src={item.image} alt={item.title} className="menu-image" />
               </div>
 
-              {/* TEXT */}
               <div className="menu-text">
                 <h3 className="menu-item-title">{item.title}</h3>
                 <p className="menu-item-desc">{item.description}</p>
@@ -92,11 +83,14 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* CTA — NOW WORKS CORRECTLY */}
         <div className="menu-cta reveal" style={{ transitionDelay: "200ms" }}>
-          <Link href="/menu" className="menu-link">
+          <button
+            type="button"
+            className="menu-link"
+            onClick={() => router.push("/menu")}
+          >
             View full menu
-          </Link>
+          </button>
         </div>
 
       </div>
