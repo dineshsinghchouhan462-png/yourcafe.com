@@ -12,7 +12,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden bg-[#0f0f0f]">
+    <section
+      id="home"
+      className="relative h-[100svh] w-full overflow-hidden bg-[#0f0f0f]"
+    >
       
       {/* Poster Image */}
       <img
