@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const menuItems = [
   {
@@ -32,7 +32,6 @@ const menuItems = [
 
 export default function Menu() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -52,11 +51,13 @@ export default function Menu() {
     );
 
     elements.forEach((el) => observer.observe(el));
+
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="menu-surface">
+    {/* 🔴 IMPORTANT: ID CHANGED FROM "menu" → "home-menu" */}
+    <section id="home-menu" className="menu-surface">
       <div ref={sectionRef} className="menu-container">
 
         {/* INTRO */}
@@ -73,6 +74,7 @@ export default function Menu() {
               className="menu-item reveal"
               style={{ transitionDelay: `${i * 120}ms` }}
             >
+              {/* IMAGE */}
               <div className="menu-image-wrap">
                 <img
                   src={item.image}
@@ -81,6 +83,7 @@ export default function Menu() {
                 />
               </div>
 
+              {/* TEXT */}
               <div className="menu-text">
                 <h3 className="menu-item-title">{item.title}</h3>
                 <p className="menu-item-desc">{item.description}</p>
@@ -89,19 +92,11 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* CTA — ABSOLUTE ROUTE NAVIGATION */}
+        {/* CTA — NOW WORKS CORRECTLY */}
         <div className="menu-cta reveal" style={{ transitionDelay: "200ms" }}>
-          <button
-            type="button"
-            className="menu-link"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              router.push("/menu");
-            }}
-          >
+          <Link href="/menu" className="menu-link">
             View full menu
-          </button>
+          </Link>
         </div>
 
       </div>
