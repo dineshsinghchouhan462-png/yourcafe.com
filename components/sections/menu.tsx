@@ -91,8 +91,11 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="menu-cta reveal" style={{ transitionDelay: "200ms" }}>
+        {/* CTA — FIXED */}
+        <div
+          className="menu-cta reveal relative z-[10]"
+          style={{ transitionDelay: "200ms", pointerEvents: "auto" }}
+        >
           <Link href="/menu" className="menu-link">
             View full menu
           </Link>
