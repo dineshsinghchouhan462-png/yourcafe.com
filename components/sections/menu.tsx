@@ -56,7 +56,7 @@ export default function Menu() {
   }, []);
 
   return (
-    <section id="menu" className="menu-surface">
+    <section className="menu-surface">
       <div ref={sectionRef} className="menu-container">
 
         {/* INTRO */}
@@ -89,11 +89,16 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* CTA — FORCE ROUTE */}
+        {/* CTA — ABSOLUTE ROUTE NAVIGATION */}
         <div className="menu-cta reveal" style={{ transitionDelay: "200ms" }}>
           <button
-            onClick={() => router.push("/menu")}
+            type="button"
             className="menu-link"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              router.push("/menu");
+            }}
           >
             View full menu
           </button>
